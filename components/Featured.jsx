@@ -9,10 +9,9 @@ const Featured = () => {
       <div className="grid grid-cols-2 gap-8 py-[48px]">
         <div className="relative h-[600px] border border-[#5C6B94] rounded p-[16px] ">
           <div className="relative h-full ">
-            {" "}
             <Image
               className="rounded inset-[16px]"
-              src={"https://picsum.photos/400/400"}
+              src="/Images/artvedic17.jpeg"
               alt="img1"
               layout="fill"
             />
@@ -22,7 +21,7 @@ const Featured = () => {
           <div className="relative">
             <Image
               className="rounded"
-              src={"https://picsum.photos/400/400"}
+              src="/Images/artvedic27.jpeg"
               alt="img1"
               layout="fill"
             />
@@ -31,7 +30,7 @@ const Featured = () => {
             <div className="relative">
               <Image
                 className="rounded"
-                src={"https://picsum.photos/300/400"}
+                src="/Images/artvedic15.jpeg"
                 alt="img1"
                 layout="fill"
               />
@@ -39,7 +38,7 @@ const Featured = () => {
             <div className="relative">
               <Image
                 className="rounded"
-                src={"https://picsum.photos/200/400"}
+                src="/Images/artvedic14.jpeg"
                 alt="img1"
                 layout="fill"
               />
@@ -52,21 +51,21 @@ const Featured = () => {
         <div className="grid grid-cols-3 gap-8 pt-[16px] pb-[12px]">
           <div className="relative aspect-square">
             <Image
-              src={"https://picsum.photos/100/100"}
+              src="/Images/artvedic12.jpeg"
               alt="imagebrowse"
               layout="fill"
             />
           </div>
           <div className="relative aspect-square">
             <Image
-              src={"https://picsum.photos/300/100"}
+              src="/Images/artvedic11.jpeg"
               alt="imagebrowse2"
               layout="fill"
             />
           </div>
           <div className="relative aspect-square">
             <Image
-              src={"https://picsum.photos/200/100"}
+              src="/Images/artvedic13.jpeg"
               alt="imagebrowse3"
               layout="fill"
             />
@@ -80,7 +79,7 @@ const Featured = () => {
           <Masonry gutter="24px">
             <Image
               className="w-full h-auto"
-              src={"https://picsum.photos/400/900"}
+              src="/Images/artvedic18.jpeg"
               alt="imagebrowse5"
               width={0}
               height={0}
@@ -89,7 +88,7 @@ const Featured = () => {
 
             <Image
               className="w-full h-auto"
-              src={"https://picsum.photos/600/900"}
+              src="/Images/artvedic19.jpeg"
               alt="imagebrowse3"
               width={0}
               height={0}
@@ -98,7 +97,7 @@ const Featured = () => {
 
             <Image
               className="w-full h-auto"
-              src={"https://picsum.photos/500/600"}
+              src="/Images/artvedic20.jpeg"
               alt="imagebrowse3"
               width={0}
               height={0}
@@ -108,7 +107,7 @@ const Featured = () => {
             <Image
               className="w-full h-auto"
               sizes="100vw"
-              src={"https://picsum.photos/400/400"}
+              src="/Images/artvedic21.jpeg"
               alt="imagebrowse3"
               width={0}
               height={0}
@@ -116,7 +115,7 @@ const Featured = () => {
             <Image
               className="w-full h-auto"
               sizes="100vw"
-              src={"https://picsum.photos/300/400"}
+              src="/Images/artvedic22.jpeg"
               alt="imagebrowse3"
               width={0}
               height={0}
@@ -124,7 +123,7 @@ const Featured = () => {
             <Image
               className="w-auto h-auto"
               sizes="100vw"
-              src={"https://picsum.photos/800/700"}
+              src="/Images/artvedic23.jpeg"
               alt="imagebrowse3"
               width={0}
               height={0}
@@ -132,7 +131,7 @@ const Featured = () => {
             <Image
               className="w-full h-auto"
               sizes="100vw"
-              src={"https://picsum.photos/600/400"}
+              src="/Images/artvedic24.jpeg"
               alt="imagebrowse3"
               width={0}
               height={0}
@@ -140,7 +139,7 @@ const Featured = () => {
             <Image
               className="w-full h-auto"
               sizes="100vw"
-              src={"https://picsum.photos/400/400"}
+              src="/Images/artvedic26.jpeg"
               alt="imagebrowse3"
               width={0}
               height={0}
