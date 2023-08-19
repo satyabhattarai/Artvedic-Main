@@ -7,7 +7,6 @@ const register = () => {
       <p className="text-white">
         Delve into our feelings, sight and emotions through my artwork
       </p>
-      <form></form>
     </div>
   );
 };
