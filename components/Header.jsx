@@ -1,16 +1,23 @@
+import Link from "next/link";
 import React from "react";
 const Header = () => {
   return (
     <div className="flex justify-between items-center h-[32px] text-[#F7F8F8] ">
       <ul className="flex gap-8 ">
         <li>ARTVEDIC</li>
-        <li>ABOUT</li>
+
+        <li>
+          <Link href="/about">ABOUT</Link>
+        </li>
+
         <li>CONTACT</li>
         <li>
-          CART{" "}
-          <span className="bg-white rounded text-[#1e2433] py-[4px] px-[8px] ml-[8px]">
-            1
-          </span>
+          <Link href="/cart">
+            CART
+            <span className="bg-white rounded text-[#1e2433] py-[4px] px-[8px] ml-[8px]">
+              1
+            </span>
+          </Link>
         </li>
       </ul>
       <div>
