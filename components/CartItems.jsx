@@ -4,43 +4,29 @@ import React from "react";
 const Cartitems = () => {
   return (
     <div>
-      <div className="grid grid-cols-2 text-white gap-[133px]">
-        <div className="grid grid-cols-2">
-          <div className="">
+      <div className="grid grid-cols-2 ">
+        <div className="grid grid-cols-2 ">
+          <div className="rounded-sm ml-[40px]">
             <Image
-              className="rounded inset-[16px]"
-              src="/Images/artvedic21.jpeg"
+              className="rounded-sm py-[16px] px-[16px] border"
+              src="/Images/artvedic14.jpeg"
               alt="img1"
               width={259}
               height={319}
             />
           </div>
-          <div>
-            Saber
-            <p>2023</p>
-            <div className="flex justify-between">
-              rs.5000
-              <div>delete</div>
+          <div className="grid grid-rows-2 pl-[20px]">
+            <div className="text-white ">
+              summit
+              <p>2023</p>
+            </div>
+            <div className="flex self-end justify-between text-white">
+              5000
+              <span>delete</span>
             </div>
           </div>
-
-          <div className="">
-            <Image
-              className="rounded inset-[16px]"
-              src="/Images/artvedic27.jpeg"
-              alt="img1"
-              width={259}
-              height={319}
-            />
-          </div>
-          <div>
-            Eye <p>2023</p>
-          </div>
         </div>
-        <div >Total Rs.10000
-          <p>
-          <span className="border py-[4px] px-[16px]">COMPLETE ORDER</span>
-</p></div>
+        <div className="text-white">total</div>
       </div>
     </div>
   );
