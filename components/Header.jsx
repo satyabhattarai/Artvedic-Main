@@ -4,13 +4,17 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center h-[32px] text-[#F7F8F8] ">
       <ul className="flex gap-8 ">
-        <li>ARTVEDIC</li>
+        <li>
+          <Link href="/">ARTVEDIC</Link>
+        </li>
 
         <li>
           <Link href="/about">ABOUT</Link>
         </li>
 
-        <li>CONTACT</li>
+        <li>
+          <Link href="/contact">CONTACT</Link>
+          </li>
         <li>
           <Link href="/cart">
             CART
