@@ -8,7 +8,7 @@ const Featured = () => {
     <div className="">
       <div className="grid grid-cols-2 gap-8 py-[48px]">
         <div className="relative h-[600px] border border-[#5C6B94] rounded p-[16px] ">
-          <div className="relative h-full ">
+          <div className="relative h-full">
             <Image
               className="rounded inset-[16px]"
               src="/Images/artvedic17.jpeg"
