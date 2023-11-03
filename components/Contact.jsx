@@ -33,7 +33,7 @@ const Contact = () => {
 
     return (
         <div className={styles.container}>
-            <h1>Contact Us</h1>
+            <h1><pre>Contact Us</pre></h1>
             <form onSubmit={handleSubmit}>
                 <div className={`${styles.mb-3}`}>
                     <label htmlFor="name" className={`${styles.formlabel}`}>Enter your name</label>
