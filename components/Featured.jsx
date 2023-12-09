@@ -1,9 +1,96 @@
+import "react-multi-carousel/lib/styles.css";
+
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import React, { useEffect, useState } from "react";
 
+import { API_URL } from "../utils/urls";
+import Carousel from "react-multi-carousel";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
+import Productcard from "./Productcard";
+import { fetchDatafromApi } from "utils/api";
+import { useRouter } from "next/router";
 
-const Featured = () => {
+const Featured = ({ products, category, workshop }) => {
+  // console.log("apiResult", apiResult);
+  const router = useRouter();
+
+  // const [data, setData] = useState(null)
+  // useEffect(() => {
+  //   fetchartworks();
+  // }, []);
+  // const fetchartworks = async () => {
+  //   const apiResult = await fetchDatafromApi("/api/all-artworks");
+  // The above and below code is same let it be OR Understand this later...
+  // const {data} = await fetchDatafromApi("/api/all-artworks");
+  //   setData(apiResult.data);
+  // };
+  const [isMoving, setIsMoving] = useState(false);
+  const handleviewmore =()=>{
+    setvisible((prev)=>prev+4);
+  }
+    const handleviewmorecat = () => {
+      setvisiblecat((prev) => prev + 3);
+    };
+   const handleviewless = () => {
+     setvisible((prev) => prev - 4);
+   };
+   const handleviewlesscat = () => {
+     setvisiblecat((prev) => prev - 3);
+   };
+   const [visible, setvisible] = useState(8);
+    const [visiblecat, setvisiblecat] = useState(3);
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+  const featuredItems = [
+    { id: 1, path: "/Images/artvedic17.jpeg" },
+    { id: 2, path: "/Images/artvedic27.jpeg" },
+    { id: 3, path: "/Images/artvedic15.jpeg" },
+    { id: 4, path: "/Images/artvedic14.jpeg" },
+  ];
+  // const workshops = [
+  //   { id: 1, path: "/Images/artvedic12.jpeg" },
+  //   { id: 2, path: "/Images/artvedic11.jpeg" },
+  //   { id: 3, path: "/Images/artvedic13.jpeg" },
+  //   { id: 4, path: "/Images/artvedic12.jpeg" },
+  //   { id: 5, path: "/Images/artvedic11.jpeg" },
+  //   { id: 6, path: "/Images/artvedic13.jpeg" },
+  //   { id: 7, path: "/Images/artvedic12.jpeg" },
+  //   { id: 8, path: "/Images/artvedic11.jpeg" },
+  //   { id: 9, path: "/Images/artvedic13.jpeg" },
+  // ];
+
+  // console.log(products); //to see api array in console
+  // useEffect(() => {
+  //   fetchartworks();
+  // }, []);
+  // const allArtworks = async () => {
+  //   const { data } = await fetchDatafromApi("/api/all-artworks?populate=*");
+  //   setAllArtworks(data);
+  // };
+// const uploadfile= async(event)=> {
+// const body= new FormData();
+// body.append("file", img);
+// const res=await fetch()
+
+// }
   return (
     <div className="">
       <div className="grid grid-cols-2 gap-8 py-[48px]">
@@ -27,14 +114,7 @@ const Featured = () => {
             />
           </div>
           <div className="grid grid-cols-2 gap-8">
-            <div className="relative">
-              <Image
-                className="rounded"
-                src="/Images/artvedic15.jpeg"
-                alt="img1"
-                layout="fill"
-              />
-            </div>
+
             <div className="relative">
               <Image
                 className="rounded"
@@ -49,107 +129,115 @@ const Featured = () => {
       <div>
         <h3 className="text-[#F7F8F8] ">BROWSE BY CATEGORY</h3>
         <div className="grid grid-cols-3 gap-8 pt-[16px] pb-[12px]">
-          <div className="relative aspect-square">
-            <Image
-              src="/Images/artvedic12.jpeg"
-              alt="imagebrowse"
-              layout="fill"
-            />
-          </div>
-          <div className="relative aspect-square">
-            <Image
-              src="/Images/artvedic11.jpeg"
-              alt="imagebrowse2"
-              layout="fill"
-            />
-          </div>
-          <div className="relative aspect-square">
-            <Image
-              src="/Images/artvedic13.jpeg"
-              alt="imagebrowse3"
-              layout="fill"
-            />
-          </div>
+          {category?.data?.slice(0, visiblecat).map((cat) => {
+            return (
+              <div
+                className="relative aspect-square"
+                key={`categoory-${cat.attributes.id}`}
+              >
+                <Link href={`/category/${cat.attributes.slug}`}>
+                  <Image
+                    src={`${API_URL}${cat.attributes.img.data.attributes.url}`}
+                    alt="imagebrowse"
+                    layout="fill"
+                  />
+                </Link>
+              </div>
+            );
+          })}
         </div>
-        <h3 className="text-[#F7F8F8]">VIEW ALL (arrow) </h3>
+        <div className="flex items-center justify-between">
+          <h3
+            className="text-[#F7F8F8] cursor-pointer"
+            onClick={handleviewmorecat}
+          >
+            VIEW MORE (arrow)
+          </h3>
+          <h3
+            className="text-[#F7F8F8] cursor-pointer"
+            onClick={handleviewlesscat}
+          >
+            VIEW LESS (arrow)
+          </h3>
+        </div>
       </div>
       <div className="py-[48px]">
         <h3 className="text-[#F7F8F8] pb-[16px] ">ALL ARTWORKS</h3>
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 900: 3 }}>
           <Masonry gutter="24px">
-            <Image
-              className="w-full h-auto"
-              src="/Images/artvedic18.jpeg"
-              alt="imagebrowse5"
-              width={0}
-              height={0}
-              sizes="100vw"
-            />
+            {/* {console.log(products)} */}
+            {products?.data?.slice(0, visible).map((artwork) => {
+              return (
+                <Productcard
+                  key={`allartwork-${artwork.id}`}
+                  artwork={artwork}
+                />
 
-            <Image
-              className="w-full h-auto"
-              src="/Images/artvedic19.jpeg"
-              alt="imagebrowse3"
-              width={0}
-              height={0}
-              sizes="100vw"
-            />
-
-            <Image
-              className="w-full h-auto"
-              src="/Images/artvedic20.jpeg"
-              alt="imagebrowse3"
-              width={0}
-              height={0}
-              sizes="100vw"
-            />
-
-            <Image
-              className="w-full h-auto"
-              sizes="100vw"
-              src="/Images/artvedic21.jpeg"
-              alt="imagebrowse3"
-              width={0}
-              height={0}
-            />
-            <Image
-              className="w-full h-auto"
-              sizes="100vw"
-              src="/Images/artvedic22.jpeg"
-              alt="imagebrowse3"
-              width={0}
-              height={0}
-            />
-            <Image
-              className="w-auto h-auto"
-              sizes="100vw"
-              src="/Images/artvedic23.jpeg"
-              alt="imagebrowse3"
-              width={0}
-              height={0}
-            />
-            <Image
-              className="w-full h-auto"
-              sizes="100vw"
-              src="/Images/artvedic24.jpeg"
-              alt="imagebrowse3"
-              width={0}
-              height={0}
-            />
-            <Image
-              className="w-full h-auto"
-              sizes="100vw"
-              src="/Images/artvedic26.jpeg"
-              alt="imagebrowse3"
-              width={0}
-              height={0}
-            />
-            <h3 className="text-[#F7F8F8] py-[12px]">VIEW ALL (arrow)</h3>
+                // <Image
+                //   onClick={() => {
+                //     router.push("productitems");
+                //   }}
+                //   key={`allartwork-${artwork.id}`}
+                //   className="w-full h-auto border rounded-lg shadow dark:border-gray-500"
+                //   src={`${API_URL}${artwork.attributes.img.data.attributes.url}`}
+                //   alt="imagebrowse5"
+                //   width={0}
+                //   height={0}
+                //   sizes="100vw"
+                // />
+              );
+            })}
+            <h3
+              className="text-[#F7F8F8] py-[12px] cursor-pointer"
+              onClick={handleviewmore}
+            >
+              VIEW MORE (arrow)
+            </h3>
+            <h3 className="text-[#F7F8F8] py-[12px] cursor-pointer" onClick={handleviewless}>
+              VIEW LESS (arrow)
+            </h3>
           </Masonry>
         </ResponsiveMasonry>
+      </div>
+      <h3 className="text-[#F7F8F8] pb-[16px] ">AVAILABLE WORKSHOPS</h3>
+      <div>
+        <Carousel
+          itemClass="carouselItem"
+          swipeable={true}
+          draggable={true}
+          responsive={responsive}
+          infiniteLoop={true}
+          beforeChange={() => setIsMoving(true)}
+          afterChange={() => setIsMoving(false)}
+        >
+          {workshop?.data?.map((img) => {
+            return (
+              <div
+                className="relative aspect-square"
+                key={`categoory-${img.id}`}
+              >
+                <Image
+                  draggable={false}
+                  onClick={(e) => {
+                    if (!isMoving) router.push("productitems");
+                  }}
+                  key={`category-${img.id}`}
+                  className="w-full h-auto "
+                  src={`${API_URL}${img.attributes.img.data.attributes.url}`}
+                  alt="imagebrowse5"
+                  layout="fill"
+                  sizes="100vw"
+                />
+              </div>
+            );
+          })}
+        </Carousel>
+        <div>
+  {/* <input type="file" id="myFile" name="filename"/>
+  <button type="submit" className="bg-white border rounded " onClick={uploadfile}>Upload File</button> */}
+        </div>
       </div>
     </div>
   );
 };
-
 export default Featured;

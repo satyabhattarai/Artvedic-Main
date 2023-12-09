@@ -50,7 +50,8 @@ const Cartitems = () => {
           </div>
         </div>
         <div className="text-white">
-          Total <span className="text-sm text-white/[0.67] pl-[12px]">Rs.10000</span>
+          Total{" "}
+          <span className="text-sm text-white/[0.67] pl-[12px]">Rs.10000</span>
           <p>
             <button className="border px-[16px] py-[4px] text-sm mt-[10px]">
               COMPLETE ORDER

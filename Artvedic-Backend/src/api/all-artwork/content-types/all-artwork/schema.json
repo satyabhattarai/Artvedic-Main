@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "all_artworks",
+  "info": {
+    "singularName": "all-artwork",
+    "pluralName": "all-artworks",
+    "displayName": "allArtwork",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "img": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "all_artworks"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "price": {
+      "type": "biginteger"
+    }
+  }
+}
