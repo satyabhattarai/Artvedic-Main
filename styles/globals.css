@@ -62,8 +62,8 @@
 .subject-nav-list li {
   margin-bottom: 8px;
 }
-.nav-link a.active {
-  background-color: var(--primary-color);
+.nav-link-active {
+  background-color: #b2b2b2;
   text-decoration: none;
   color: #ffffff;
 }
@@ -83,3 +83,5 @@
   display: inline-block;
   vertical-align: middle;
 }
+
+	.has-mask {position: absolute; clip: rect(10px, 150px, 130px, 10px);}

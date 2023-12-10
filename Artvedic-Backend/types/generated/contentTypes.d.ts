@@ -362,6 +362,147 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiAllArtworkAllArtwork extends Schema.CollectionType {
+  collectionName: 'all_artworks';
+  info: {
+    singularName: 'all-artwork';
+    pluralName: 'all-artworks';
+    displayName: 'allArtwork';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    img: Attribute.Media;
+    categories: Attribute.Relation<
+      'api::all-artwork.all-artwork',
+      'manyToMany',
+      'api::category.category'
+    >;
+    slug: Attribute.UID<'api::all-artwork.all-artwork', 'name'>;
+    name: Attribute.String;
+    description: Attribute.Text;
+    price: Attribute.BigInteger;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::all-artwork.all-artwork',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::all-artwork.all-artwork',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiArtistProfileArtistProfile extends Schema.CollectionType {
+  collectionName: 'artist_profiles';
+  info: {
+    singularName: 'artist-profile';
+    pluralName: 'artist-profiles';
+    displayName: 'Artist-profile';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    img: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::artist-profile.artist-profile',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::artist-profile.artist-profile',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'category';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    img: Attribute.Media;
+    name: Attribute.String;
+    slug: Attribute.UID<'api::category.category', 'name'>;
+    all_artworks: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::all-artwork.all-artwork'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWorkshopWorkshop extends Schema.CollectionType {
+  collectionName: 'workshops';
+  info: {
+    singularName: 'workshop';
+    pluralName: 'workshops';
+    displayName: 'workshop';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    img: Attribute.Media;
+    date: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::workshop.workshop',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::workshop.workshop',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -677,147 +818,6 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiAllArtworkAllArtwork extends Schema.CollectionType {
-  collectionName: 'all_artworks';
-  info: {
-    singularName: 'all-artwork';
-    pluralName: 'all-artworks';
-    displayName: 'allArtwork';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    img: Attribute.Media;
-    categories: Attribute.Relation<
-      'api::all-artwork.all-artwork',
-      'manyToMany',
-      'api::category.category'
-    >;
-    slug: Attribute.UID<'api::all-artwork.all-artwork', 'name'>;
-    name: Attribute.String;
-    description: Attribute.Text;
-    price: Attribute.BigInteger;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::all-artwork.all-artwork',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::all-artwork.all-artwork',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiArtistProfileArtistProfile extends Schema.CollectionType {
-  collectionName: 'artist_profiles';
-  info: {
-    singularName: 'artist-profile';
-    pluralName: 'artist-profiles';
-    displayName: 'Artist-profile';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    img: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::artist-profile.artist-profile',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::artist-profile.artist-profile',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCategoryCategory extends Schema.CollectionType {
-  collectionName: 'categories';
-  info: {
-    singularName: 'category';
-    pluralName: 'categories';
-    displayName: 'category';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    img: Attribute.Media;
-    name: Attribute.String;
-    slug: Attribute.UID<'api::category.category', 'name'>;
-    all_artworks: Attribute.Relation<
-      'api::category.category',
-      'manyToMany',
-      'api::all-artwork.all-artwork'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::category.category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::category.category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiWorkshopWorkshop extends Schema.CollectionType {
-  collectionName: 'workshops';
-  info: {
-    singularName: 'workshop';
-    pluralName: 'workshops';
-    displayName: 'workshop';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    img: Attribute.Media;
-    date: Attribute.DateTime;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::workshop.workshop',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::workshop.workshop',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -828,16 +828,16 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::all-artwork.all-artwork': ApiAllArtworkAllArtwork;
+      'api::artist-profile.artist-profile': ApiArtistProfileArtistProfile;
+      'api::category.category': ApiCategoryCategory;
+      'api::workshop.workshop': ApiWorkshopWorkshop;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::all-artwork.all-artwork': ApiAllArtworkAllArtwork;
-      'api::artist-profile.artist-profile': ApiArtistProfileArtistProfile;
-      'api::category.category': ApiCategoryCategory;
-      'api::workshop.workshop': ApiWorkshopWorkshop;
     }
   }
 }

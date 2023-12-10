@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
+
 const Header = () => {
   const router = useRouter();
   return (
@@ -16,7 +17,7 @@ const Header = () => {
 
         <li>
           <Link href="/contact">CONTACT</Link>
-          </li>
+        </li>
         <li>
           <Link href="/cart">
             CART
@@ -25,10 +26,18 @@ const Header = () => {
             </span>
           </Link>
         </li>
+        <li>
+          <Link className="border px-8 py-1" href="/artistform" >Artist</Link>
+        </li>
       </ul>
       <div>
-        <button onClick={()=> {router.push("login")}} className="border border-[#5C6B94] rounded px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent">
-          SHOP NOW
+        <button
+          onClick={() => {
+            router.push("login");
+          }}
+          className="border border-[#5C6B94] rounded px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent"
+        >
+          Log In
         </button>
       </div>
     </div>

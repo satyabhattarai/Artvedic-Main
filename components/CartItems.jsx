@@ -1,6 +1,8 @@
 //import { RiDeleteBin6Line } from "react-icons/ri";
+
 import Image from "next/image";
 import React from "react";
+
 const Cartitems = () => {
   return (
     <div>
@@ -50,7 +52,7 @@ const Cartitems = () => {
           </div>
         </div>
         <div className="text-white">
-          Total{" "}
+          Total
           <span className="text-sm text-white/[0.67] pl-[12px]">Rs.10000</span>
           <p>
             <button className="border px-[16px] py-[4px] text-sm mt-[10px]">

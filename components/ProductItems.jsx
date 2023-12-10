@@ -50,9 +50,10 @@ const ProductItems = (props) => {
               <button className="border border-[#5C6B94] px-[16px] py-[4px]  text-white bg-gradient-to-r from-[#0F131B] to-transparent">
                 BID NOW
               </button>
-              <button className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent">
+                <button className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent">
                 BUY NOW
               </button>
+              
             </div>
             <button onClick={ () => {dispatch(addToCart("product1"))}}>ADD TO CART</button>
           </div>
