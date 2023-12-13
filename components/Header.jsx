@@ -1,9 +1,13 @@
 import Link from "next/link";
-import React from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const Header = () => {
   const router = useRouter();
+   const [client_email, setClientEmail] = useState('');
+     useEffect(() => {
+           setClientEmail(JSON.parse(localStorage.getItem("client_email")));
+     }, []);
   return (
     <div className="flex justify-between items-center h-[32px] text-[#F7F8F8] ">
       <ul className="flex gap-8 ">
@@ -27,18 +31,33 @@ const Header = () => {
           </Link>
         </li>
         <li>
-          <Link className="border px-8 py-1" href="/artistform" >Artist</Link>
+          <Link className="px-8 py-1 border" href="/artistform">
+            Artist
+          </Link>
         </li>
       </ul>
       <div>
-        <button
-          onClick={() => {
-            router.push("login");
-          }}
-          className="border border-[#5C6B94] rounded px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent"
-        >
-          Log In
-        </button>
+        {client_email && (<Fragment>
+          <button className="text-white border px-[16px] py-[4px] border-[#5C6B94] rounded">
+            {client_email}
+          </button>
+          <button onClick={()=>{
+            localStorage.removeItem('client_email');
+            window.location.reload()}} className="text-white border px-[16px] py-[4px] border-[#5C6B94] rounded">
+           LogOut
+          </button>
+          </Fragment>
+        )}
+        {!client_email && (
+          <button
+            onClick={() => {
+              router.push("login");
+            }}
+            className="border border-[#5C6B94] rounded px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent"
+          >
+            Log In
+          </button>
+        )}
       </div>
     </div>
   );

@@ -8,20 +8,31 @@ import { addToCart } from "store/cartSlice";
 
 const ProductItems = (props) => {
   const router = useRouter();
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
   let artwork = {};
   if (props.router.query.artwork) {
     artwork = JSON.parse(props.router.query.artwork) || null;
   } else {
     return <p>Image not clicked</p>;
   }
-
+  console.log(artwork);
   return (
     <Fragment>
       <div className="grid grid-cols-2 gap-8 mt-[48px]">
         <div className="bold text-[16px] text-white text-justify ">
           <div className="">
-            <h1 onClick={()=>router.push("artist_profile")}>{`Artist's Profile`}</h1>
+            <h1
+              onClick={() => {
+                router.push({
+                  pathname: "artist_profile",
+                  query: { artwork: JSON.stringify(artwork) },
+                });
+              }}
+            >
+              Artist Profile
+            </h1>
+            <p>{artwork.attributes.artist}</p>
+            {/* {artwork.attributes.artist} */}
           </div>
           <div className="mb-[140px] mt-[48px]">
             {artwork.attributes.description}
@@ -50,12 +61,17 @@ const ProductItems = (props) => {
               <button className="border border-[#5C6B94] px-[16px] py-[4px]  text-white bg-gradient-to-r from-[#0F131B] to-transparent">
                 BID NOW
               </button>
-                <button className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent">
+              <button className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent">
                 BUY NOW
               </button>
-              
             </div>
-            <button onClick={ () => {dispatch(addToCart("product1"))}}>ADD TO CART</button>
+            <button
+              onClick={() => {
+                dispatch(addToCart("product1"));
+              }}
+            >
+              ADD TO CART
+            </button>
           </div>
         </div>
         <div>

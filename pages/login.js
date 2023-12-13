@@ -1,13 +1,32 @@
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Publiclayout from "@/components/Publiclayout";
 import React from "react";
 import { useRouter } from "next/router";
+import { fetchDatafromApi } from "utils/api";
+import { stringify } from "postcss";
 
 const Login = () => {
   const router = useRouter();
+  const [email, setemail]=useState('');
+  const [password, setpassword]=useState('');
+
+  const checklogin=(e)=>{
+    e.preventDefault();
+    let store= fetchDatafromApi(`/api/client?populate=*&filters[email]=${email}&filters[password]=${password}`)
+if (store){
+  alert("Login Sucess");
+  localStorage.setItem('client_email', JSON.stringify(email));
+  router.push('/');
+
+}
+else{
+  alert('Wrong Entry');
+}
+
+  }
   const loginImages = [
     { id: 1, path: "/Images/artvedic18.jpeg" },
     { id: 2, path: "/Images/artvedic19.jpeg" },
@@ -36,21 +55,27 @@ const Login = () => {
         </ul>
       </div>
       <div className="grid grid-cols-2">
-        <div className="mt-[104px]">
+        <form className="mt-[104px]" onSubmit={checklogin}>
           <h5 className="text-white mb-[4px]">WELCOME BACK</h5>
           <p className="text-[#B7B9B9] mb-[72px]">
             We have been waiting for you
           </p>
           <label className="block text-white">Email</label>
           <input
-            className=" mt-[8px] mb-[16px] bg-transparent border border-[#5C6B94] rounded pl-[12px]  py-[8px] pr-[79px]"
+            className=" mt-[8px] text-white mb-[16px] bg-transparent border border-[#5C6B94] rounded pl-[12px]  py-[8px] pr-[79px]"
             placeholder="test_email@gmail.com"
+            type="email"
+            onChange={(e) => setemail(e.target.value)}
+            // value={email}
           ></input>
           <label className="block text-white">Password</label>
           <input
-            className="block  mt-[8px] mb-[16px] bg-transparent border border-[#5C6B94] rounded  pl-[12px] py-[8px] pr-[79px]"
+            className="block  text-white mt-[8px] mb-[16px] bg-transparent border border-[#5C6B94] rounded  pl-[12px] py-[8px] pr-[79px]"
             placeholder=".........."
+            onChange={(e) => setpassword(e.target.value)}
+            type="password"
           ></input>
+
           <button
             type="submit"
             className="text-white border px-[16px] py-[4px] border-[#5C6B94] rounded"
@@ -71,22 +96,25 @@ const Login = () => {
               Get Started
             </a>
           </p>
-        </div>
+        </form>
         <div>
           <ResponsiveMasonry
             columnsCountBreakPoints={{ 350: 1, 768: 2, 900: 3 }}
-          ><Masonry gutter="24px">
-             {loginImages.map((img)=>{
-             return(
-             <Image
-                key={`group-${img.id}`}
-                className="w-full h-auto"
-                src={img.path}
-                alt="imagebrowse5"
-                width={0}
-                height={0}
-                sizes="100vw"
-              />);})}
+          >
+            <Masonry gutter="24px">
+              {loginImages.map((img) => {
+                return (
+                  <Image
+                    key={`group-${img.id}`}
+                    className="w-full h-auto"
+                    src={img.path}
+                    alt="imagebrowse5"
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                  />
+                );
+              })}
             </Masonry>
           </ResponsiveMasonry>
         </div>

@@ -1,7 +1,7 @@
 import Artist from "@/components/Artist";
 import React from "react";
 
-const artist = () => {
+const Artistpage = () => {
   return (
     <div>
       <Artist />
@@ -9,4 +9,4 @@ const artist = () => {
   );
 };
 
-export default artist;
+export default Artistpage;
