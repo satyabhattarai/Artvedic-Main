@@ -1,9 +1,9 @@
 import Image from "next/image";
-import React from 'react'
+import React from "react";
 import { useRouter } from "next/router";
 
 const ArtistForm = () => {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <div>
       <div className="mt-24">
@@ -23,14 +23,11 @@ const ArtistForm = () => {
                 Name
               </label>
               <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 id="grid-first-name"
                 type="text"
                 placeholder="Jane"
               />
-              <p class="text-red-500 text-xs italic">
-                Please fill out this field.
-              </p>
             </div>
             <div class="w-full md:w-1/2 px-3">
               <label
@@ -158,6 +155,6 @@ const ArtistForm = () => {
       </div>
     </div>
   );
-}
+};
 
-export default ArtistForm
+export default ArtistForm;
