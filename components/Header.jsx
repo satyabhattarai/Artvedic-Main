@@ -36,8 +36,8 @@ const Header = () => {
         </li>
         {client_email && (
           <li>
-            <Link className="px-8 py-1 border" href="/artistform">
-              Artist
+            <Link className="px-8 py-1 border" href="/uploadform">
+              Upload
             </Link>
           </li>
         )}

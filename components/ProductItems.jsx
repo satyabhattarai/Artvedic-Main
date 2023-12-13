@@ -21,18 +21,18 @@ const ProductItems = (props) => {
       <div className="grid grid-cols-2 gap-8 mt-[48px]">
         <div className="bold text-[16px] text-white text-justify ">
           <div className="">
-            <h1
+            <p
               onClick={() => {
                 router.push({
                   pathname: "artist_profile",
-                  query: { artwork: JSON.stringify(artwork) },
+                  query: { artist: artwork.attributes.artist },
                 });
               }}
             >
               Artist Profile
-            </h1>
-            <p>{artwork.attributes.artist}</p>
-            {/* {artwork.attributes.artist} */}
+              <br />
+              {artwork.attributes.artist}
+            </p>
           </div>
           <div className="mb-[140px] mt-[48px]">
             {artwork.attributes.description}

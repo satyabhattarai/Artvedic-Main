@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { addToCart } from "store/cartSlice";
 const Productcard = ({ artwork }) => {
+  console.log(artwork);
   const router = useRouter();
   const dispatch = useDispatch();
   return (
@@ -17,7 +18,7 @@ const Productcard = ({ artwork }) => {
           });
         }}
         key={`allartwork-${artwork.id}`}
-        className="w-full h-auto"
+        className="w-full h-auto cursor-pointer"
         src={`${API_URL}${artwork.attributes.img.data.attributes.url}`}
         alt="imagebrowse5"
         width={0}
