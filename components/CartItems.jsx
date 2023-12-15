@@ -1,7 +1,8 @@
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 import { API_URL } from "utils/urls";
+import Image from "next/image";
 import KhaltiCheckout from "khalti-checkout-web";
 import { removeFromCart } from "store/cartSlice";
 
@@ -54,7 +55,7 @@ const Cartitems = () => {
       <div className="grid grid-cols-2 mt-[40px] gap-[133px]">
         <div className="grid grid-cols-1 gap-8">
           {!cart || cart.length === 0 ? (
-            <h1 className="text-white text-2xl mb-8">Your Cart is Empty.</h1>
+            <h1 className="mb-8 text-2xl text-white">Your Cart is Empty.</h1>
           ) : (
             cart.map((artwork) => (
               <div className="grid grid-cols-2" key={`cartItems-${artwork.id}`}>
@@ -68,10 +69,10 @@ const Cartitems = () => {
                   />
                 </div>
                 <div className="grid grid-rows-2 pl-[20px]">
-                  <div className="text-white font-semibold">
+                  <div className="font-semibold text-white">
                     {artwork.attributes.name}
                   </div>
-                  <div className="flex self-end justify-between text-white items-end">
+                  <div className="flex items-end self-end justify-between text-white">
                     <div>
                       <p className="text-gray-300">
                         {artwork.quantity} x {artwork.attributes.price}

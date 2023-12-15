@@ -17,17 +17,8 @@
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
-    },
-    "categories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::category.category",
-      "inversedBy": "all_artworks"
     },
     "slug": {
       "type": "uid",
@@ -43,6 +34,12 @@
       "type": "biginteger"
     },
     "artist": {
+      "type": "string"
+    },
+    "review": {
+      "type": "text"
+    },
+    "categories": {
       "type": "string"
     }
   }

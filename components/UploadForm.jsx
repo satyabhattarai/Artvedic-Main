@@ -1,12 +1,64 @@
 import React from "react";
+import { postDatatoApi } from "utils/api";
+import { uploadDatatoApi } from "utils/api";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const UploadForm = () => {
   const router = useRouter();
+  const [files, setFiles] = useState();
+  const [uploadedImage, setUploadedImage] = useState();
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = {
+      //strapi ko name price description & img left ma vako strapi ma vako right ma vako form ma j name cha tei.
+      name: e.target.name.value,
+      description: e.target.description.value,
+      price: e.target.price.value,
+      img: uploadedImage,
+      artist: e.target.artistname.value,
+      categories: e.target.category.value,
+    };
+console.log(formData);
+    try {
+      const imageUploadResult = await uploadImage(e);
+      console.log(imageUploadResult);
+    } catch (error) {
+      alert("Error uploading submitted image.");
+      return;
+    }
+
+    try {
+      const result = await postDatatoApi(
+        "/api/all-artworks",
+        JSON.stringify({ data: formData })
+      );
+      console.log(result);
+       alert("Uploaded Sucessfully");
+    } catch (error) {
+      alert("Error adding profile data.");
+      return;
+    }
+  };
+
+  const uploadImage = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("files", files[0]);
+
+    try {
+      const result = await uploadDatatoApi(formData);
+      setUploadedImage(result[0].id);
+    } catch (error) {
+      alert("could not upload file");
+    }
+  };
+
   return (
     <div>
       <div>
-        <div className="relative min-h-screen flex items-center justify-center ">
+        <div className="relative flex items-center justify-center min-h-screen ">
           <div className=" w-full p-10 bg-[#1E2433] rounded-xl z-10">
             <div className="text-center">
               <h2 className="mt-5 text-3xl font-bold text-gray-200">
@@ -16,40 +68,73 @@ const UploadForm = () => {
                 SVG, PNG, JPG or GIF (MAX. 800x400px)
               </p>
             </div>
-            <form className="mt-8 space-y-3" action="#" method="POST">
+            <form className="mt-8 space-y-3" onSubmit={onSubmit}>
               <div className="grid grid-cols-1 space-y-2">
-                <label className="text-sm font-bold text-gray-500 tracking-wide">
+                <label className="text-sm font-bold tracking-wide text-gray-500">
+                  Your Name
+                </label>
+                <input
+                  className="p-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                  type="text"
+                  name="artistname"
+                  placeholder="Your Name"
+                />
+
+                <label
+                  for="art"
+                  className="text-sm font-bold tracking-wide text-gray-500"
+                >
+                  Category
+                </label>
+                <select
+                  className="p-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                  name="category"
+                  id="art"
+                >
+                  <option value="Acrylic">Acrylics</option>
+                  <option value="Watercolor">Watercolor</option>
+                  <option value="Oil Painting">Oil Painting</option>
+                  <option value="Portrait">Portrait</option>
+                  <option value="Abstract">Abstract</option>
+                  <option value="Glass Art">Glass Art</option>
+                  <option value="Pixel Art">Pixel Art</option>
+                </select>
+
+                <label className="text-sm font-bold tracking-wide text-gray-500">
                   Product Name
                 </label>
                 <input
-                  className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                  className="p-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                   type="text"
+                  name="name"
                   placeholder="Name Your Art (eg: Oil Painting)"
                 />
-                <label className="text-sm font-bold text-gray-500 tracking-wide">
+                <label className="text-sm font-bold tracking-wide text-gray-500">
                   Description
                 </label>
                 <textarea
-                  className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                  className="p-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                   type="text"
                   placeholder="Describe your Art in short"
+                  name="description"
                 />
-                <label className="text-sm font-bold text-gray-500 tracking-wide">
+                <label className="text-sm font-bold tracking-wide text-gray-500">
                   Price
                 </label>
                 <input
-                  className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                  className="p-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                   type="text"
                   placeholder="Set Price"
+                  name="price"
                 />
               </div>
               <div className="grid grid-cols-1 space-y-2">
-                <label className="text-sm font-bold text-gray-500 tracking-wide">
+                <label className="text-sm font-bold tracking-wide text-gray-500">
                   Attach Document
                 </label>
-                <div className="flex items-center justify-center w-full">
-                  <label className="flex flex-col rounded-lg border-4 border-dashed w-full h-60 p-10 group text-center">
-                    <div className="h-full w-full text-center flex flex-col items-center justify-center ">
+                {/* <div className="flex items-center justify-center w-full">
+                  <label className="flex flex-col w-full p-10 text-center border-4 border-dashed rounded-lg h-60 group">
+                    <div className="flex flex-col items-center justify-center w-full h-full text-center ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-10 h-10 text-blue-400 group-hover:text-blue-600"
@@ -64,8 +149,8 @@ const UploadForm = () => {
                           d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                         />
                       </svg>
-                      <div className="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10"></div>
-                      <p className="pointer-none text-gray-500 ">
+                      <div className="flex flex-auto w-2/5 mx-auto -mt-10 max-h-48"></div>
+                      <p className="text-gray-500 pointer-none ">
                         <span className="text-sm">Drag and drop</span> files
                         here <br /> or
                         <a
@@ -80,21 +165,26 @@ const UploadForm = () => {
                     </div>
                     <input type="file" className="hidden" />
                   </label>
-                </div>
+                </div> */}
               </div>
               <p className="text-sm text-gray-300">
                 <span>Upload Your Art</span>
               </p>
               <div>
-                <button className="flex justify-center p-4 my-5 font-semibold tracking-wide text-gray-100 transition duration-300 ease-in bg-blue-500 rounded-full shadow-lg cursor-pointer focus:outline-none focus:shadow-outline hover:bg-blue-600">
+                {/* <button className="flex justify-center p-4 my-5 font-semibold tracking-wide text-gray-100 transition duration-300 ease-in bg-blue-500 rounded-full shadow-lg cursor-pointer focus:outline-none focus:shadow-outline hover:bg-blue-600">
                   Upload
-                </button>
-                <button
-                  className="my-5 w-full flex justify-center bg-blue-500 text-gray-100 p-4  rounded-full tracking-wide
-                font-semibold  focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300"
-                >
+                </button> */}
+                <div className="upload-profile-picture-container">
+                  <input
+                    type="file"
+                    name="img"
+                    onChange={(e) => setFiles(e.target.files)}
+                  />
+                </div>
+                <input type="submit" value="Submit" />
+                {/* <button className="flex justify-center w-full p-4 my-5 font-semibold tracking-wide text-gray-100 transition duration-300 ease-in bg-blue-500 rounded-full shadow-lg cursor-pointer focus:outline-none focus:shadow-outline hover:bg-blue-600">
                   Continue
-                </button>
+                </button> */}
               </div>
             </form>
           </div>

@@ -1,8 +1,8 @@
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Productcard from "@/components/Productcard";
-import React, { useState, useEffect } from "react";
 import { fetchDatafromApi } from "utils/api";
 import { useRouter } from "next/router";
 
@@ -30,7 +30,7 @@ const Artist_profile = () => {
       <div className="">
         <div className="flex mb-32 text-white gap-9 ">
           <div className="p-4">
-            <h1 className="mb-1 text-3xl font-bold mb-4">
+            <h1 className="mb-1 mb-4 text-3xl font-bold">
               {router.query.artist}
             </h1>
             <div className="flex gap-[600px]">
@@ -44,7 +44,7 @@ const Artist_profile = () => {
           </div>
         </div>
         <div className="mb-4 text-3xl text-green-200">
-          {router.query.artist}'s artworks
+          {router.query.artist}s artworks
         </div>
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 900: 3 }}>
           {artistWorks?.data && (

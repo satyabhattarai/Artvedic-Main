@@ -6,7 +6,7 @@ import Productcard from "@/components/Productcard";
 import React from "react";
 import { fetchDatafromApi } from "utils/api";
 
-const Category = ({ category, products, slug }) => {
+const Category = ({ category, products, name }) => {
 
   if (!products) return <p>Loading...</p>;
   return (
@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 
   const paths = category.data.map((c) => ({
     params: {
-      slug: c.attributes.slug,
+      name: c.attributes.name,
     },
   }));
   return {
@@ -37,12 +37,12 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-export async function getStaticProps({ params: { slug } }) {
+export async function getStaticProps({ params: { name } }) {
   const category = await fetchDatafromApi(
-    `/api/categories?filters[slug][$eq]=${slug}`
+    `/api/categories?filters[name][$eq]=${name}`
   );
   const products = await fetchDatafromApi(
-    `/api/all-artworks?populate=*&[filters][categories][slug][$eq]=${slug}`
+    `/api/all-artworks?populate=*&[filters][categories][$eq]=${name}`
   );
      const artist = await fetchDatafromApi(
        `/api/all-artworks?populate=*&filters[type]=acrylics}`
@@ -52,7 +52,7 @@ export async function getStaticProps({ params: { slug } }) {
     props: {
       category,
       products,
-      slug,
+      name,
 
     },
   };

@@ -29,12 +29,6 @@
     "slug": {
       "type": "uid",
       "targetField": "name"
-    },
-    "all_artworks": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::all-artwork.all-artwork",
-      "mappedBy": "categories"
     }
   }
 }

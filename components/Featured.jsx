@@ -12,6 +12,8 @@ import { fetchDatafromApi } from "utils/api";
 import { useRouter } from "next/router";
 
 const Featured = ({ products, category, workshop }) => {
+
+
   // console.log("apiResult", apiResult);
   const router = useRouter();
 
@@ -59,6 +61,7 @@ const Featured = ({ products, category, workshop }) => {
       items: 1,
     },
   };
+  console.log(products);
   const featuredItems = [
     { id: 1, path: "/Images/artvedic17.jpeg" },
     { id: 2, path: "/Images/artvedic27.jpeg" },
@@ -135,7 +138,7 @@ const Featured = ({ products, category, workshop }) => {
                 className="relative aspect-square"
                 key={`categoory-${cat.attributes.id}`}
               >
-                <Link href={`/category/${cat.attributes.slug}`}>
+                <Link href={`/category/${cat.attributes.name}`}>
                   <Image
                     src={`${API_URL}${cat.attributes.img.data.attributes.url}`}
                     alt="imagebrowse"

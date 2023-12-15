@@ -23,3 +23,29 @@ export const fetchDatafromApi = async (endpoint) => {
 //   const data = await response.json();
 //   return data;
 // };
+export const postDatatoApi = async (endpoint, formData) => {
+  const options = {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + STRAPI_API_TOKEN,
+      "Content-Type": "application/json",
+    },
+    body: formData,
+  };
+  const response = await fetch(`${API_URL}${endpoint}`, options);
+  const data = await response.json();
+  return data;
+};
+
+export const uploadDatatoApi = async (formData) => {
+  const options = {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + STRAPI_API_TOKEN,
+    },
+    body: formData,
+  };
+  const response = await fetch(`${API_URL}/api/upload`, options);
+  const data = await response.json();
+  return data;
+};
