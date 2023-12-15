@@ -1,9 +1,10 @@
 import { API_URL } from "utils/urls";
 import Image from "next/image";
 import React from "react";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import { addToCart } from "store/cartSlice";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+
 const Productcard = ({ artwork }) => {
   console.log(artwork);
   const router = useRouter();
@@ -29,12 +30,12 @@ const Productcard = ({ artwork }) => {
         <h2 className="pb-[4px]">{artwork.attributes.name}</h2>
         <p className="py-[4px] text-lg">{artwork.attributes.description}</p>
 
-        <div className="flex justify-between py-4 items-center">
+        <div className="flex items-center justify-between py-4">
           <div className="text-xl mb-[10px]">
             Price: &#8360; {artwork.attributes.price}
           </div>
           <button
-            className="border rounded text-white border-white px-4 py-2"
+            className="px-4 py-2 text-white border border-white rounded"
             onClick={() => dispatch(addToCart(artwork))}
           >
             Add to Cart

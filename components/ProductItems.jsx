@@ -1,16 +1,47 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useRouter, withRouter } from "next/router";
 
 import { API_URL } from "utils/urls";
 import Image from "next/image";
+import KhaltiCheckout from "khalti-checkout-web";
 import { addToCart } from "store/cartSlice";
 
 const ProductItems = (props) => {
+
+
+
+  let khaltiConfig = {
+    publicKey: "myPublicKey",
+    productIdentity: "Artworks",
+    productName:"artwork.attributes.name",
+    productUrl: "localhost:3000",
+    eventHandler: {
+      onSuccess(payload) {
+        console.log("Success: " + payload);
+      },
+      onError(error) {
+        console.log(error);
+      },
+      onClose() {
+        console.log("Widget is closing");
+      },
+    },
+    paymentPreference: ["KHALTI", "EBANKING", "MOBILE_BANKING", "CONNECT_IPS"],
+  };
+
+const [checkout, setCheckout] = useState(null);
+useEffect(() => {
+  //create khalti checkout and calculate total price when cart changes
+  const checkout = new KhaltiCheckout(khaltiConfig);
+  setCheckout(checkout);
+}, []);
   const router = useRouter();
   const dispatch = useDispatch();
   let artwork = {};
   if (props.router.query.artwork) {
+    //props.router.query thiyo I removed props
     artwork = JSON.parse(props.router.query.artwork) || null;
   } else {
     return <p>Image not clicked</p>;
@@ -61,7 +92,12 @@ const ProductItems = (props) => {
               <button className="border border-[#5C6B94] px-[16px] py-[4px]  text-white bg-gradient-to-r from-[#0F131B] to-transparent">
                 BID NOW
               </button>
-              <button className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent">
+              <button
+                onClick={() => {
+                  checkout.show({ amount:  artwork.attributes.price *100 });
+                }}
+                className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent"
+              >
                 BUY NOW
               </button>
             </div>
@@ -85,12 +121,14 @@ const ProductItems = (props) => {
         </div>
       </div>
       <div className="mt-[76px]">
-        <h5 className="text-white mb-[18px]">REVIEWS</h5>
+        <h5 className="text-white mb-[18px]">GIVE REVIEWS</h5>
         <textarea
           className="w-[1092px] h-[125px] pl-[12px] pt-[4px] bg-transparent border border-[#5C6B94] text-[#5C6B94]"
           placeholder="Leave a Review"
         ></textarea>
       </div>
+      <div className="mt-4 text-white">REVIEWS</div>
+      <h5 className="mt-2 text-white">{artwork.attributes.review}</h5>
     </Fragment>
   );
 };

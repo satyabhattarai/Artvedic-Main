@@ -690,16 +690,13 @@ export interface ApiAllArtworkAllArtwork extends Schema.CollectionType {
   };
   attributes: {
     img: Attribute.Media;
-    categories: Attribute.Relation<
-      'api::all-artwork.all-artwork',
-      'manyToMany',
-      'api::category.category'
-    >;
     slug: Attribute.UID<'api::all-artwork.all-artwork', 'name'>;
     name: Attribute.String;
     description: Attribute.Text;
     price: Attribute.BigInteger;
     artist: Attribute.String;
+    review: Attribute.Text;
+    categories: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -763,11 +760,6 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     img: Attribute.Media;
     name: Attribute.String;
     slug: Attribute.UID<'api::category.category', 'name'>;
-    all_artworks: Attribute.Relation<
-      'api::category.category',
-      'manyToMany',
-      'api::all-artwork.all-artwork'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
