@@ -5,31 +5,28 @@ import Link from "next/link";
 import Publiclayout from "@/components/Publiclayout";
 import React from "react";
 import { fetchDatafromApi } from "utils/api";
-import { stringify } from "postcss";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 const Login = () => {
   const router = useRouter();
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
 
-  const checklogin = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, password);
-    let store = fetchDatafromApi(
-      `/api/clients?populate=*&filters[$and][0][email][$eq]=${email}&filters[password][$eq]=${password}`
-    );
-    if (store) {
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: e.target.email.value,
+      password: e.target.password.value,
+    });
+    if (result.ok) {
       alert("Login Sucess");
-      localStorage.setItem("client_email", JSON.stringify(email));
-      // localStorage.setItem("name", JSON.stringify(store.data.attributes.name));
-      console.log(store.data);
       router.push("/");
     } else {
-      alert("Wrong Entry");
+      alert("Wrong Email or Password");
     }
   };
+
   const loginImages = [
     { id: 1, path: "/Images/artvedic18.jpeg" },
     { id: 2, path: "/Images/artvedic19.jpeg" },
@@ -58,7 +55,7 @@ const Login = () => {
         </ul>
       </div>
       <div className="grid grid-cols-2">
-        <form className="mt-[104px]" onSubmit={checklogin}>
+        <form className="mt-[104px]" onSubmit={onSubmit}>
           <h5 className="text-white mb-[4px]">WELCOME BACK</h5>
           <p className="text-[#B7B9B9] mb-[72px]">
             We have been waiting for you
@@ -66,17 +63,18 @@ const Login = () => {
           <label className="block text-white">Email</label>
           <input
             className=" mt-[8px] text-white mb-[16px] bg-transparent border border-[#5C6B94] rounded pl-[12px]  py-[8px] pr-[79px]"
-            placeholder="test_email@gmail.com"
+            placeholder="maryjane@gmail.com"
             type="email"
-            onChange={(e) => setemail(e.target.value)}
-            // value={email}
+            name="email"
+            id="email"
           ></input>
           <label className="block text-white">Password</label>
           <input
             className="block  text-white mt-[8px] mb-[16px] bg-transparent border border-[#5C6B94] rounded  pl-[12px] py-[8px] pr-[79px]"
             placeholder=".........."
-            onChange={(e) => setpassword(e.target.value)}
             type="password"
+            name="password"
+            id="password"
           ></input>
 
           <button
