@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useRouter, withRouter } from "next/router";
 
@@ -8,11 +8,11 @@ import Image from "next/image";
 import KhaltiCheckout from "khalti-checkout-web";
 import { addToCart } from "store/cartSlice";
 import { postDatatoApi } from "utils/api";
-import { uploadDatatoApi } from "utils/api";
+import { useSession } from "next-auth/react";
 
 const ProductItems = (props) => {
   const [checkout, setCheckout] = useState(null);
-
+  const { data: session } = useSession();
   let khaltiConfig = {
     publicKey: "myPublicKey",
     productIdentity: "Artworks",
@@ -51,8 +51,9 @@ const ProductItems = (props) => {
     const formData = {
       //strapi ko name price description & img left ma vako strapi ma vako right ma vako form ma j name cha tei.
       price: e.target.bidprice.value,
-      artist: artwork.attributes.artist,
+      bid_to_artist: artwork.attributes.artist,
       name: artwork.attributes.name,
+      bid_by: session.user.email,
     };
     console.log(formData);
     try {
@@ -102,44 +103,49 @@ const ProductItems = (props) => {
                 &#8360; {artwork.attributes.price}
               </span>
             </div>
-            <form onSubmit={onSubmit}>
-              {" "}
-              <div className="text-black mb-[12px]">
-                <h3 className="text-white mb-[8px]">Bid The Artwork</h3>
-                <input
-                  className=" text-center text-[#5C6B94] bg-transparent border border-[#5C6B94] py-[2px] px-[8px] "
-                  defaultValue={artwork.attributes.price}
-                  type="number"
-                  name="bidprice"
-                  step={2000}
-                ></input>
-              </div>
-              <div className="flex items-center justify-between mb-[16px]">
-                <button
-                  type="submit"
-                  value="Submit"
-                  className="border border-[#5C6B94] px-[16px] py-[4px]  text-white bg-gradient-to-r from-[#0F131B] to-transparent"
-                >
-                  BID NOW
-                </button>
+            {session && artwork.attributes.artist !== session.user.email && (
+              <form onSubmit={onSubmit}>
+                {" "}
+                <div className="text-black mb-[12px]">
+                  <h3 className="text-white mb-[8px]">Bid The Artwork</h3>
+                  <input
+                    className=" text-center text-[#5C6B94] bg-transparent border border-[#5C6B94] py-[2px] px-[8px] "
+                    defaultValue={artwork.attributes.price}
+                    type="number"
+                    name="bidprice"
+                    step={2000}
+                  ></input>
+                </div>
+                <div className="flex items-center justify-between mb-[16px]">
+                  <button
+                    type="submit"
+                    value="Submit"
+                    className="border border-[#5C6B94] px-[16px] py-[4px]  text-white bg-gradient-to-r from-[#0F131B] to-transparent"
+                  >
+                    BID NOW
+                  </button>
 
-                <button
-                  onClick={() => {
-                    checkout.show({ amount: artwork.attributes.price * 100 });
-                  }}
-                  className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent"
-                >
-                  BUY NOW
-                </button>
-              </div>
-            </form>
-            <button
-              onClick={() => {
-                dispatch(addToCart("product1"));
-              }}
-            >
-              ADD TO CART
-            </button>
+                  <button
+                    onClick={() => {
+                      checkout.show({ amount: artwork.attributes.price * 100 });
+                    }}
+                    className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent"
+                  >
+                    BUY NOW
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {session && artwork.attributes.artist !== session.user.email && (
+              <button
+                onClick={() => {
+                  dispatch(addToCart("product1"));
+                }}
+              >
+                ADD TO CART
+              </button>
+            )}
           </div>
         </div>
         <div>

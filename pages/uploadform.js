@@ -1,12 +1,8 @@
-import Image from 'next/image'
-import { Link } from 'react-router-dom'
-import React from 'react'
-import UploadForm from '@/components/UploadForm';
+import React from "react";
+import UploadForm from "@/components/UploadForm";
 
 const uploadform = () => {
-  return (
-  <UploadForm/>
-  );
-}
+  return <UploadForm />;
+};
 
-export default uploadform
+export default uploadform;
