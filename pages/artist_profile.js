@@ -1,7 +1,6 @@
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import React, { useEffect, useState } from "react";
 
-import Image from "next/image";
 import Productcard from "@/components/Productcard";
 import { fetchDatafromApi } from "utils/api";
 import { useRouter } from "next/router";

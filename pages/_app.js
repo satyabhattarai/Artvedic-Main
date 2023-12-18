@@ -4,21 +4,22 @@ import Layout from "@/components/Layout";
 import { Provider } from "react-redux";
 import store from "store/store";
 
-// import { SessionProvider } from "next-auth/next";
+import { SessionProvider } from "next-auth/react";
 
-
-export default function App({ Component, pageProps: { session, ...pageProps }, }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   const renderWithLayout =
     Component.getLayout ||
-    function(page) {
+    function (page) {
       return (
-        // <SessionProvider session={session}>
-           <Provider store={store}>
+        <SessionProvider session={session}>
+          <Provider store={store}>
             <Layout>{page}</Layout>
           </Provider>
-        // </SessionProvider>
-
-      )
+        </SessionProvider>
+      );
     };
   return renderWithLayout(<Component {...pageProps} />);
 }
