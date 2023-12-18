@@ -17,11 +17,13 @@ const Search = ({ setShowSearch }) => {
     if (!query.length) {
       setdata([]);
     } else {
-      setdata(
-        fetchDatafromApi(
+      const getSearchResult = async () => {
+        const result = await fetchDatafromApi(
           `/api/all-artworks?populate=*&filters[name][$contains]=${query}`
-        )
-      );
+        );
+        setdata(result);
+      };
+      getSearchResult();
     }
   }, [query]);
   return (
@@ -61,11 +63,12 @@ const Search = ({ setShowSearch }) => {
                     <Image
                       src={`${API_URL}${item.attributes.img.data.attributes.url}`}
                       alt="imagesearched"
-                      layout="fill"
+                      width={600}
+                      height={600}
                     />
                   )}
                 </div>
-                <div className="prod-details">
+                <div className="prod-details text-black">
                   <span className="name">
                     Product Name: {item.attributes.name}
                   </span>
