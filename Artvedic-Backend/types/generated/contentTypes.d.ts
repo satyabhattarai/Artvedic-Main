@@ -794,9 +794,10 @@ export interface ApiRequestRequest extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    artist: Attribute.String;
     price: Attribute.String;
     name: Attribute.String;
+    bid_by: Attribute.Email;
+    bid_to_artist: Attribute.Email;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
