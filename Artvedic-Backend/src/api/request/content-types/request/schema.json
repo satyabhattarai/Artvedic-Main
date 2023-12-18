@@ -12,14 +12,17 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "artist": {
-      "type": "string"
-    },
     "price": {
       "type": "string"
     },
     "name": {
       "type": "string"
+    },
+    "bid_by": {
+      "type": "email"
+    },
+    "bid_to_artist": {
+      "type": "email"
     }
   }
 }
