@@ -1,11 +1,13 @@
 import Featured from "@/components/Featured";
 import Image from "next/image";
+import Search from "@/components/Search";
 import { fetchDatafromApi } from "utils/api";
 
 export default function Home({ product,category,workshop }) {
   return (
     <div>
       <Featured products={product} category={category}  workshop={workshop}/>
+     
     </div>
   );
 }

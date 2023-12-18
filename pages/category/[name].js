@@ -7,11 +7,12 @@ import React from "react";
 import { fetchDatafromApi } from "utils/api";
 
 const Category = ({ category, products, name }) => {
-
   if (!products) return <p>Loading...</p>;
   return (
     <div>
-      <h1 className="text-white">{category?.data[0]?.attributes?.name}</h1>
+      <h1 className="mt-8 mb-8 text-3xl font-semibold text-white">
+        {category?.data[0]?.attributes?.name}
+      </h1>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 900: 3 }}>
         <Masonry gutter="24px">
           {products?.data?.map((product) => {
@@ -44,16 +45,15 @@ export async function getStaticProps({ params: { name } }) {
   const products = await fetchDatafromApi(
     `/api/all-artworks?populate=*&[filters][categories][$eq]=${name}`
   );
-     const artist = await fetchDatafromApi(
-       `/api/all-artworks?populate=*&filters[type]=acrylics}`
-     );
+  const artist = await fetchDatafromApi(
+    `/api/all-artworks?populate=*&filters[type]=acrylics}`
+  );
 
   return {
     props: {
       category,
       products,
       name,
-
     },
   };
 }

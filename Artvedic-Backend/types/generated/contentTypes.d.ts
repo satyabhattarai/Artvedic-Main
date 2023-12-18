@@ -715,36 +715,6 @@ export interface ApiAllArtworkAllArtwork extends Schema.CollectionType {
   };
 }
 
-export interface ApiArtistProfileArtistProfile extends Schema.CollectionType {
-  collectionName: 'artist_profiles';
-  info: {
-    singularName: 'artist-profile';
-    pluralName: 'artist-profiles';
-    displayName: 'Artist-profile';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    img: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::artist-profile.artist-profile',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::artist-profile.artist-profile',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
@@ -812,6 +782,39 @@ export interface ApiClientClient extends Schema.CollectionType {
   };
 }
 
+export interface ApiRequestRequest extends Schema.CollectionType {
+  collectionName: 'requests';
+  info: {
+    singularName: 'request';
+    pluralName: 'requests';
+    displayName: 'Request';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    artist: Attribute.String;
+    price: Attribute.String;
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::request.request',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::request.request',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiWorkshopWorkshop extends Schema.CollectionType {
   collectionName: 'workshops';
   info: {
@@ -826,7 +829,8 @@ export interface ApiWorkshopWorkshop extends Schema.CollectionType {
   attributes: {
     name: Attribute.String;
     img: Attribute.Media;
-    date: Attribute.DateTime;
+    description: Attribute.Text;
+    categories: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -862,9 +866,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::all-artwork.all-artwork': ApiAllArtworkAllArtwork;
-      'api::artist-profile.artist-profile': ApiArtistProfileArtistProfile;
       'api::category.category': ApiCategoryCategory;
       'api::client.client': ApiClientClient;
+      'api::request.request': ApiRequestRequest;
       'api::workshop.workshop': ApiWorkshopWorkshop;
     }
   }

@@ -7,15 +7,16 @@ import { API_URL } from "utils/urls";
 import Image from "next/image";
 import KhaltiCheckout from "khalti-checkout-web";
 import { addToCart } from "store/cartSlice";
+import { postDatatoApi } from "utils/api";
+import { uploadDatatoApi } from "utils/api";
 
 const ProductItems = (props) => {
-
-
+  const [checkout, setCheckout] = useState(null);
 
   let khaltiConfig = {
     publicKey: "myPublicKey",
     productIdentity: "Artworks",
-    productName:"artwork.attributes.name",
+    productName: "artwork.attributes.name",
     productUrl: "localhost:3000",
     eventHandler: {
       onSuccess(payload) {
@@ -30,13 +31,11 @@ const ProductItems = (props) => {
     },
     paymentPreference: ["KHALTI", "EBANKING", "MOBILE_BANKING", "CONNECT_IPS"],
   };
-
-const [checkout, setCheckout] = useState(null);
-useEffect(() => {
-  //create khalti checkout and calculate total price when cart changes
-  const checkout = new KhaltiCheckout(khaltiConfig);
-  setCheckout(checkout);
-}, []);
+  useEffect(() => {
+    //create khalti checkout and calculate total price when cart changes
+    const checkout = new KhaltiCheckout(khaltiConfig);
+    setCheckout(checkout);
+  }, []);
   const router = useRouter();
   const dispatch = useDispatch();
   let artwork = {};
@@ -47,12 +46,36 @@ useEffect(() => {
     return <p>Image not clicked</p>;
   }
   console.log(artwork);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = {
+      //strapi ko name price description & img left ma vako strapi ma vako right ma vako form ma j name cha tei.
+      price: e.target.bidprice.value,
+      artist: artwork.attributes.artist,
+      name: artwork.attributes.name,
+    };
+    console.log(formData);
+    try {
+      const result = await postDatatoApi(
+        "/api/requests",
+        JSON.stringify({ data: formData })
+      );
+      console.log(result);
+      alert("Bid Request Sent Successfully");
+    } catch (error) {
+      alert("Error bidding data.");
+      return;
+    }
+  };
+
   return (
     <Fragment>
       <div className="grid grid-cols-2 gap-8 mt-[48px]">
         <div className="bold text-[16px] text-white text-justify ">
           <div className="">
             <p
+              type="text"
+              name="artistname"
               onClick={() => {
                 router.push({
                   pathname: "artist_profile",
@@ -65,12 +88,12 @@ useEffect(() => {
               {artwork.attributes.artist}
             </p>
           </div>
-          <div className="mb-[140px] mt-[48px]">
+          <div className="mb-[140px] mt-[48px]" type="text" name="description">
             {artwork.attributes.description}
           </div>
           <div className="max-w-[255px]">
             <div className="flex items-center justify-between">
-              <h5 className="mb-[4px]">{artwork.attributes.name}</h5>
+              <h5 className="mb-[4px] ">{artwork.attributes.name}</h5>
               <span className="mb-[4px]">TOTAL</span>
             </div>
             <div className="flex items-center justify-between mb-[24px]">
@@ -79,28 +102,37 @@ useEffect(() => {
                 &#8360; {artwork.attributes.price}
               </span>
             </div>
-            <div className="text-black mb-[12px]">
-              <h3 className="text-white mb-[8px]">Bid The Artwork</h3>
-              <input
-                className=" text-center text-[#5C6B94] bg-transparent border border-[#5C6B94] py-[2px] px-[8px] "
-                defaultValue="5000"
-                type="number"
-                step={2000}
-              ></input>
-            </div>
-            <div className="flex items-center justify-between mb-[16px]">
-              <button className="border border-[#5C6B94] px-[16px] py-[4px]  text-white bg-gradient-to-r from-[#0F131B] to-transparent">
-                BID NOW
-              </button>
-              <button
-                onClick={() => {
-                  checkout.show({ amount:  artwork.attributes.price *100 });
-                }}
-                className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent"
-              >
-                BUY NOW
-              </button>
-            </div>
+            <form onSubmit={onSubmit}>
+              {" "}
+              <div className="text-black mb-[12px]">
+                <h3 className="text-white mb-[8px]">Bid The Artwork</h3>
+                <input
+                  className=" text-center text-[#5C6B94] bg-transparent border border-[#5C6B94] py-[2px] px-[8px] "
+                  defaultValue={artwork.attributes.price}
+                  type="number"
+                  name="bidprice"
+                  step={2000}
+                ></input>
+              </div>
+              <div className="flex items-center justify-between mb-[16px]">
+                <button
+                  type="submit"
+                  value="Submit"
+                  className="border border-[#5C6B94] px-[16px] py-[4px]  text-white bg-gradient-to-r from-[#0F131B] to-transparent"
+                >
+                  BID NOW
+                </button>
+
+                <button
+                  onClick={() => {
+                    checkout.show({ amount: artwork.attributes.price * 100 });
+                  }}
+                  className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent"
+                >
+                  BUY NOW
+                </button>
+              </div>
+            </form>
             <button
               onClick={() => {
                 dispatch(addToCart("product1"));
@@ -115,6 +147,7 @@ useEffect(() => {
             className="border rounded-s border-[#5C6B94] p-[16px]"
             src={`${API_URL}${artwork.attributes.img.data.attributes.url}`}
             alt="Product Item"
+            onChange={(e) => setFiles(e.target.files)}
             width={627}
             height={727}
           />

@@ -4,7 +4,7 @@ import { uploadDatatoApi } from "utils/api";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-const UploadForm = () => {
+const Workshopform = () => {
   const router = useRouter();
   const [files, setFiles] = useState();
 
@@ -12,12 +12,10 @@ const UploadForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = {
-      //strapi ko name price description & img left ma vako strapi ma vako right ma vako form ma j name cha tei.
+      //name price description & img (left ma vako strapi ma vako) (right ma vako form ma j name cha tei).
       name: e.target.name.value,
       description: e.target.description.value,
-      price: e.target.price.value,
       img: uploadedImage,
-      artist: e.target.artistname.value,
       categories: e.target.category.value,
     };
     console.log(formData);
@@ -31,7 +29,7 @@ const UploadForm = () => {
 
     try {
       const result = await postDatatoApi(
-        "/api/all-artworks",
+        "/api/workshops",
         JSON.stringify({ data: formData })
       );
       console.log(result);
@@ -55,7 +53,6 @@ const UploadForm = () => {
       alert("could not upload file");
     }
   };
-
   return (
     <div>
       <div>
@@ -71,24 +68,24 @@ const UploadForm = () => {
             </div>
             <form className="mt-8 space-y-3" onSubmit={onSubmit}>
               <div className="grid grid-cols-1 space-y-2">
-                <label className="text-sm font-bold tracking-wide text-gray-500">
-                  Your Name
+                <label className="mb-2 text-sm font-bold tracking-wide text-gray-500">
+                  {`ORGANIZTION NAME`}
                 </label>
                 <input
                   className="p-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                   type="text"
-                  name="artistname"
-                  placeholder="Your Name"
+                  name="name"
+                  placeholder="Eg: Satya's Art, Artvedic , Artdevotion"
                 />
 
                 <label
                   for="art"
-                  className="text-sm font-bold tracking-wide text-gray-500"
+                  className="text-sm font-bold tracking-wide text-gray-500 "
                 >
-                  Category
+                  WORKSHOP CATEGORY
                 </label>
                 <select
-                  className="p-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                  className="p-2 text-base border-gray-300 rounded-lg bo2rder focus:outline-none focus:border-indigo-500"
                   name="category"
                   id="art"
                 >
@@ -101,41 +98,23 @@ const UploadForm = () => {
                   <option value="Pixel Art">Pixel Art</option>
                 </select>
 
-                <label className="text-sm font-bold tracking-wide text-gray-500">
-                  Product Name
-                </label>
-                <input
-                  className="p-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
-                  type="text"
-                  name="name"
-                  placeholder="Name Your Art (eg: Oil Painting)"
-                />
-                <label className="text-sm font-bold tracking-wide text-gray-500">
-                  Description
+                <label className="text-sm font-bold tracking-wide text-gray-500 ">
+                  DESCRIPTION
                 </label>
                 <textarea
                   className="p-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                   type="text"
-                  placeholder="Describe your Art in short"
+                  placeholder="Describe your workshop in short"
                   name="description"
-                />
-                <label className="text-sm font-bold tracking-wide text-gray-500">
-                  Price
-                </label>
-                <input
-                  className="p-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
-                  type="text"
-                  placeholder="Set Price"
-                  name="price"
                 />
               </div>
               <div className="grid grid-cols-1 space-y-2">
                 <label className="text-sm font-bold tracking-wide text-gray-500">
-                  Attach Document
+                  ATTACH DOCUMENT
                 </label>
                 <div className="flex items-center justify-center w-full">
                   <label className="flex flex-col w-full p-10 text-center border-4 border-dashed rounded-lg">
-                    <div className="flex flex-col items-center justify-center w-full h-full text-center ">
+                    <div className="flex flex-col items-center justify-center w-full h-full text-center cursor-pointer ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-10 h-20 text-blue-400 group-hover:text-blue-600"
@@ -152,7 +131,7 @@ const UploadForm = () => {
                       </svg>
                       <p className="text-gray-500 pointer-none ">
                         <span className="text-sm text-blue-500 underline ">
-                          CHOOSE YOUR ARTWORK HERE.
+                          CHOOSE YOUR WORKSHOP FLYER HERE.
                         </span>
                       </p>
                       <input
@@ -169,20 +148,9 @@ const UploadForm = () => {
                 <input
                   type="submit"
                   value="Submit"
-                  className="px-8 py-2 mt-4 text-white border"
+                  className="px-8 py-2 mt-4 text-white border cursor-pointer"
                 />
               </div>
-              {/* this was input ko div mathi/// prev ui changed but not removed
-                 <button className="flex justify-center p-4 my-5 font-semibold tracking-wide text-gray-100 transition duration-300 ease-in bg-blue-500 rounded-full shadow-lg cursor-pointer focus:outline-none focus:shadow-outline hover:bg-blue-600">
-                  Upload
-                </button> */}
-                {/* <div>
-                  <input
-                    type="file"
-                    name="img"
-                    onChange={(e) => setFiles(e.target.files)}
-                  />
-                </div> */}
             </form>
           </div>
         </div>
@@ -191,4 +159,4 @@ const UploadForm = () => {
   );
 };
 
-export default UploadForm;
+export default Workshopform;

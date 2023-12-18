@@ -1,32 +1,35 @@
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import Publiclayout from "@/components/Publiclayout";
 import React from "react";
-import { useRouter } from "next/router";
 import { fetchDatafromApi } from "utils/api";
 import { stringify } from "postcss";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Login = () => {
   const router = useRouter();
-  const [email, setemail]=useState('');
-  const [password, setpassword]=useState('');
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
 
-  const checklogin=(e)=>{
+  const checklogin = (e) => {
     e.preventDefault();
-    let store= fetchDatafromApi(`/api/client?populate=*&filters[email]=${email}&filters[password]=${password}`)
-if (store){
-  alert("Login Sucess");
-  localStorage.setItem('client_email', JSON.stringify(email));
-  router.push('/');
-
-}
-else{
-  alert('Wrong Entry');
-}
-
-  }
+    console.log(email, password);
+    let store = fetchDatafromApi(
+      `/api/clients?populate=*&filters[$and][0][email][$eq]=${email}&filters[password][$eq]=${password}`
+    );
+    if (store) {
+      alert("Login Sucess");
+      localStorage.setItem("client_email", JSON.stringify(email));
+      // localStorage.setItem("name", JSON.stringify(store.data.attributes.name));
+      console.log(store.data);
+      router.push("/");
+    } else {
+      alert("Wrong Entry");
+    }
+  };
   const loginImages = [
     { id: 1, path: "/Images/artvedic18.jpeg" },
     { id: 2, path: "/Images/artvedic19.jpeg" },
@@ -122,7 +125,7 @@ else{
     </>
   );
 };
-Login.getLayout=function(page){
-  return <Publiclayout>{page}</Publiclayout>
-}
+Login.getLayout = function (page) {
+  return <Publiclayout>{page}</Publiclayout>;
+};
 export default Login;

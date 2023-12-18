@@ -16,17 +16,18 @@
       "type": "string"
     },
     "img": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
-    "date": {
-      "type": "datetime"
+    "description": {
+      "type": "text"
+    },
+    "categories": {
+      "type": "string"
     }
   }
 }

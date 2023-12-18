@@ -1,4 +1,5 @@
 import { API_URL } from "utils/urls";
+import { BsCartPlus } from "react-icons/bs";
 import Image from "next/image";
 import React from "react";
 import { addToCart } from "store/cartSlice";
@@ -35,10 +36,10 @@ const Productcard = ({ artwork }) => {
             Price: &#8360; {artwork.attributes.price}
           </div>
           <button
-            className="px-4 py-2 text-white border border-white rounded"
+            className="px-4 py-2 mr-4 text-white border border-white rounded"
             onClick={() => dispatch(addToCart(artwork))}
           >
-            Add to Cart
+            <BsCartPlus  />
           </button>
         </div>
       </div>

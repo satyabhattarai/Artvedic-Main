@@ -1,11 +1,50 @@
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { fetchDatafromApi } from "utils/api";
+import { useRouter } from "next/router";
 
 const Artist = () => {
+  const router = useRouter();
+  // const [artistWorks, setArtistWorks] = useState([]);
+  const [requests, setRequests] = useState([]);
+  const [actionsText, setActionsText] = useState(null);
+  // useEffect(() => {
+  //   const artist = router.query.artist || "undefined";
+  //   async function getArtistWorks() {
+  //     // api result is a Promise waiting for data to be fetched from server
+  //     const apiResult = await fetchDatafromApi(
+  //       `/api/all-artworks?populate=*&filters[price][$eq]=${price}`
+  //     );
+  //     return apiResult;
+  //   }
+  //   getArtistWorks()
+  //     .then((res) => {
+  //       setArtistWorks(res);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
+  useEffect(() => {
+    const artist = "satya";
+    async function getRequests() {
+      // api result is a Promise waiting for data to be fetched from server
+      const apiResult = await fetchDatafromApi(
+        `/api/requests?populate=*&filters[artist][$eq]=${artist}`
+      );
+      return apiResult;
+      console.log(apiResult);
+    }
+    getRequests()
+      .then((res) => {
+        setRequests(res);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   return (
-    <div className="flex mt-12 gap-9">
-      <div>
+    <div className="mt-12">
+      {/* <div>
         <div className="text-white sidebar">
           <div className="subject-nav-form">
             <ul className=" subject-nav-list">
@@ -16,7 +55,6 @@ const Artist = () => {
               </li>
               <li>
                 <h6 className="mb-8 text-xl ">
-                  {" "}
                   <a href="#bid-requests">Requests</a>
                 </h6>
               </li>
@@ -28,8 +66,8 @@ const Artist = () => {
             </ul>
           </div>
         </div>
-      </div>
-      <div className="block">
+      </div> */}
+      {/* <div className="block">
         <div>
           <section>
             <div className="w-full">
@@ -98,7 +136,7 @@ const Artist = () => {
         </div>
         <div>
           <section
-            className="text-black mt-4 bg-white input-section"
+            className="mt-4 text-black bg-white input-section"
             id="bid-requests"
           >
             <h1 className="mb-4 font-bold">BID REQUESTS</h1>
@@ -223,7 +261,7 @@ const Artist = () => {
           <section>
             <div className="w-full">
               <section
-                className="text-black bg-white input-section mt-4"
+                className="mt-4 text-black bg-white input-section"
                 id="total-earned"
               >
                 <h1 className="mb-4 font-bold">SELLING PRODUCTS</h1>
@@ -257,7 +295,7 @@ const Artist = () => {
                         <td className="p-3 text-sm text-black ">
                           <a href="#">1003</a>
                         </td>
-                        <td className="p-3 text-sm text-black ">Jebin</td>
+                        <td className="p-3 text-sm text-black ">Fursad</td>
 
                         <td className="p-3 text-sm text-black">Completed</td>
                         <td className="p-3 text-sm text-black">Rs.25000</td>
@@ -269,6 +307,52 @@ const Artist = () => {
             </div>
           </section>
         </div>
+      </div> */}
+      <h1 className="mb-8 text-2xl text-white">Bid Requests</h1>
+      <div>
+        <table className="min-w-full text-left text-black bg-white rounded table-auto">
+          <thead className="font-medium border-b">
+            <tr>
+              <th className="px-6 py-4">Product Name</th>
+              <th className="px-6 py-4">Bid Price</th>
+              <th className="px-6 py-4">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {requests?.data?.map((request, idx) => {
+              return (
+                <tr key={`request-${idx}`}>
+                  <td className="px-6 py-4">{request.attributes.name}</td>
+                  <td className="px-6 py-4">{request.attributes.price}</td>
+                  <td className="px-6 py-4">
+                    {!actionsText ? (
+                      <>
+                        <button
+                          onClick={() => {
+                            setActionsText("Accepted");
+                          }}
+                          className="px-8 py-2 bg-green-400 rounded"
+                        >
+                          Accept
+                        </button>
+                        <button
+                          onClick={() => {
+                            setActionsText("Rejected");
+                          }}
+                          className="px-8 py-2 ml-4 bg-red-400 rounded"
+                        >
+                          Reject
+                        </button>
+                      </>
+                    ) : (
+                      actionsText
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );

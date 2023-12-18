@@ -12,8 +12,6 @@ import { fetchDatafromApi } from "utils/api";
 import { useRouter } from "next/router";
 
 const Featured = ({ products, category, workshop }) => {
-
-
   // console.log("apiResult", apiResult);
   const router = useRouter();
 
@@ -28,20 +26,20 @@ const Featured = ({ products, category, workshop }) => {
   //   setData(apiResult.data);
   // };
   const [isMoving, setIsMoving] = useState(false);
-  const handleviewmore =()=>{
-    setvisible((prev)=>prev+4);
-  }
-    const handleviewmorecat = () => {
-      setvisiblecat((prev) => prev + 3);
-    };
-   const handleviewless = () => {
-     setvisible((prev) => prev - 4);
-   };
-   const handleviewlesscat = () => {
-     setvisiblecat((prev) => prev - 3);
-   };
-   const [visible, setvisible] = useState(8);
-    const [visiblecat, setvisiblecat] = useState(3);
+  const handleviewmore = () => {
+    setvisible((prev) => prev + 4);
+  };
+  const handleviewmorecat = () => {
+    setvisiblecat((prev) => prev + 3);
+  };
+  const handleviewless = () => {
+    setvisible((prev) => prev - 4);
+  };
+  const handleviewlesscat = () => {
+    setvisiblecat((prev) => prev - 3);
+  };
+  const [visible, setvisible] = useState(8);
+  const [visiblecat, setvisiblecat] = useState(3);
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -88,12 +86,12 @@ const Featured = ({ products, category, workshop }) => {
   //   const { data } = await fetchDatafromApi("/api/all-artworks?populate=*");
   //   setAllArtworks(data);
   // };
-// const uploadfile= async(event)=> {
-// const body= new FormData();
-// body.append("file", img);
-// const res=await fetch()
+  // const uploadfile= async(event)=> {
+  // const body= new FormData();
+  // body.append("file", img);
+  // const res=await fetch()
 
-// }
+  // }
   return (
     <div className="">
       <div className="grid grid-cols-2 gap-8 py-[48px]">
@@ -117,7 +115,6 @@ const Featured = ({ products, category, workshop }) => {
             />
           </div>
           <div className="grid grid-cols-2 gap-8">
-
             <div className="relative">
               <Image
                 className="rounded"
@@ -196,7 +193,10 @@ const Featured = ({ products, category, workshop }) => {
             >
               VIEW MORE (arrow)
             </h3>
-            <h3 className="text-[#F7F8F8] py-[12px] cursor-pointer" onClick={handleviewless}>
+            <h3
+              className="text-[#F7F8F8] py-[12px] cursor-pointer"
+              onClick={handleviewless}
+            >
               VIEW LESS (arrow)
             </h3>
           </Masonry>
@@ -236,7 +236,7 @@ const Featured = ({ products, category, workshop }) => {
           })}
         </Carousel>
         <div>
-  {/* <input type="file" id="myFile" name="filename"/>
+          {/* <input type="file" id="myFile" name="filename"/>
   <button type="submit" className="bg-white border rounded " onClick={uploadfile}>Upload File</button> */}
         </div>
       </div>

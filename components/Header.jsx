@@ -1,17 +1,31 @@
-import Link from "next/link";
 import React, { Fragment, useEffect, useState } from "react";
+
+import { CgProfile } from "react-icons/cg";
+import { CiSearch } from "react-icons/ci";
+import Image from "next/image";
+import Link from "next/link";
+import Search from "./Search";
+import md5 from "md5";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+
 const Header = () => {
   const router = useRouter();
   const [client_email, setClientEmail] = useState("");
   const cart = useSelector((state) => state.cart);
+  const [ ShowSearch, setShowSearch ] = useState(false);
   const getItemsCount = () => {
     return cart.reduce((accumulator, item) => accumulator + item.quantity, 0);
   };
   useEffect(() => {
     setClientEmail(JSON.parse(localStorage.getItem("client_email")));
   }, []);
+
+const getAdorableAvatarUrl = (email) => {
+  const name = email.split("@")[0]; // Get the part before the "@" symbol
+  const firstLetter = name.trim().charAt(0).toUpperCase();
+  return `https://api.adorable.io/avatars/200/${firstLetter}.png`;
+};
   return (
     <div className="flex justify-between items-center h-[32px] text-[#F7F8F8] ">
       <ul className="flex gap-8 ">
@@ -34,20 +48,29 @@ const Header = () => {
             </span>
           </Link>
         </li>
-        {client_email && (
+        <li>
+          <CiSearch onClick={() => setShowSearch(true)} />
+        </li>
+
+        {/* {client_email && (
           <li>
-            <Link className="px-8 py-1 border" href="/uploadform">
-              Upload
+            <Link href="/uploadform">
+              <CgProfile />
             </Link>
           </li>
-        )}
+        )} */}
       </ul>
       <div>
         {client_email && (
-          <Fragment>
-            <button className="text-white border px-[16px] py-[4px] border-[#5C6B94] rounded">
-              {client_email}
-            </button>
+          <div className="flex items-center justify-between">
+            <div className="flex mr-4">
+              <button className="text-white cursor-pointer px-[16px] py-[4px]  rounded">
+                {client_email.split("@")[0]}
+              </button>
+              <Link href="/chooseform">
+                <CgProfile className="text-3xl" />
+              </Link>
+            </div>
             <button
               onClick={() => {
                 localStorage.removeItem("client_email");
@@ -57,7 +80,7 @@ const Header = () => {
             >
               LogOut
             </button>
-          </Fragment>
+          </div>
         )}
         {!client_email && (
           <button
@@ -70,6 +93,7 @@ const Header = () => {
           </button>
         )}
       </div>
+     {ShowSearch && <Search setShowSearch={setShowSearch} />}
     </div>
   );
 };
