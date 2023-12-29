@@ -11,9 +11,8 @@ const Chooseform = () => {
         </p>
       </header>
       <div>
-        <main className="container flex items-center justify-center gap-8 p-4 mt-8">
+        <main className="items-center justify-center gap-8 p-4 mt-8 ">
           <Link href={"/uploadform"}>
-            {" "}
             <section className="p-8 mb-8 bg-white rounded-lg shadow-md cursor-pointer option-container">
               <h2 className="mb-4 text-3xl font-semibold">
                 Sell Your Artworks
@@ -21,6 +20,15 @@ const Chooseform = () => {
               <p className="mb-4 text-gray-600">
                 Explore the possibility of selling your beautiful artworks to
                 art enthusiasts.
+              </p>
+            </section>
+          </Link>
+          <Link href={"/artistpage"}>
+            <section className="p-8 mb-8 bg-white rounded-lg shadow-md cursor-pointer option-container">
+              <h2 className="mb-4 text-3xl font-semibold">Bid Requests</h2>
+              <p className="mb-4 text-gray-600">
+                Dive into bid requests that cover a spectrum of creative
+                domains,design, content creation, and technology.
               </p>
             </section>
           </Link>

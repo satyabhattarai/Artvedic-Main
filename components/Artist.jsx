@@ -11,6 +11,7 @@ const Artist = () => {
   const { data: session } = useSession();
   useEffect(() => {
     const artistEmail = session?.user.email || "undefined";
+    console.log(artistEmail);
     async function getRequests() {
       // api result is a Promise waiting for data to be fetched from server
       const apiResult = await fetchDatafromApi(

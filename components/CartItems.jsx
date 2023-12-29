@@ -13,7 +13,8 @@ const Cartitems = () => {
   let khaltiConfig = {
     publicKey: "myPublicKey",
     productIdentity: "Artworks",
-    productName: cart.map((artwork) => artwork.attributes.name).join(),
+    // productName: cart.map((artwork) => artwork.attributes.name).join(),
+    productName:"Artworks",
     productUrl: "localhost:3000",
     eventHandler: {
       onSuccess(payload) {

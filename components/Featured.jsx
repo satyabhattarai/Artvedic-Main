@@ -222,7 +222,7 @@ const Featured = ({ products, category, workshop }) => {
                 <Image
                   draggable={false}
                   onClick={(e) => {
-                    if (!isMoving) router.push("productitems");
+                    if (!isMoving) router.push("workshopdashboard");
                   }}
                   key={`category-${img.id}`}
                   className="w-full h-auto "

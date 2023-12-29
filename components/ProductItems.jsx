@@ -105,7 +105,6 @@ const ProductItems = (props) => {
             </div>
             {session && artwork.attributes.artist !== session.user.email && (
               <form onSubmit={onSubmit}>
-                {" "}
                 <div className="text-black mb-[12px]">
                   <h3 className="text-white mb-[8px]">Bid The Artwork</h3>
                   <input
@@ -136,13 +135,28 @@ const ProductItems = (props) => {
                 </div>
               </form>
             )}
-
+            {!session && (
+              <div className="flex items-center justify-between">
+                <button
+                  className="px-4 py-2 border rounded"
+                  onClick={() => {
+                    alert("Login First");
+                  }}
+                >
+                  Bid now
+                </button>
+                <button
+                  className="px-4 py-2 border rounded"
+                  onClick={() => {
+                    alert("Login First");
+                  }}
+                >
+                  Buy now
+                </button>
+              </div>
+            )}
             {session && artwork.attributes.artist !== session.user.email && (
-              <button
-                onClick={() => {
-                  dispatch(addToCart("product1"));
-                }}
-              >
+              <button onClick={() => dispatch(addToCart(artwork))}>
                 ADD TO CART
               </button>
             )}

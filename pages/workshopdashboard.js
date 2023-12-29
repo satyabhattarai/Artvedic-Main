@@ -1,27 +1,39 @@
-import React from 'react'
+import React from "react";
 
+const workshops = [
+  {
+    id: 1,
+    title: "Art of Expression",
+    description: "Unlock your creativity through various artistic forms.",
+    zoomLink: "https://zoom.us/artofexpression",
+  },
+  // Add more workshops as needed
+];
 const Workshopdashboard = () => {
   return (
-    <div className="min-h-screen">
-      {/* Navigation Bar */}
-      <nav className="py-4 mt-8 text-center text-white ">
-        <h1 className="text-4xl font-bold">Workshop</h1>
-      </nav>
-
-      {/* Main Content */}
-      <div className="container p-4 mx-auto mt-8">
-        <h2 className="mb-4 text-2xl font-semibold text-white">Title</h2>
-
-        {/* Workshop Details */}
-        <div className="p-4 bg-white rounded-md shadow-md">
-          <p className="font-bold">Organizer: </p>
-          <p>desc</p>
-          <p>time</p>
-
-          {/* Join Button */}
-          <button className="px-4 py-2 mt-4 text-white bg-blue-500 rounded">
-            Join Workshop
-          </button>
+    <div>
+      <div className="container p-8 mx-auto ">
+        <h1 className="mt-8 mb-8 text-4xl font-bold text-white">
+          Workshop Dashboard
+        </h1>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {workshops.map((workshop) => (
+            <div
+              key={workshop.id}
+              className="p-6 transition duration-300 bg-white rounded-lg shadow-md hover:shadow-lg"
+            >
+              <h2 className="mb-4 text-2xl font-semibold">{workshop.title}</h2>
+              <p className="mb-4 text-gray-600">{workshop.description}</p>
+              <a
+                href={workshop.zoomLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                Join Workshop on Zoom
+              </a>
+            </div>
+          ))}
         </div>
       </div>
     </div>
