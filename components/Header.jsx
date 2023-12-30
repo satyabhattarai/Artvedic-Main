@@ -19,7 +19,6 @@ const Header = () => {
 
   useEffect(() => {
     if (session == null) return;
-    console.log("session.jwt", session.jwt);
     console.log(session);
   }, [session]);
 

@@ -20,7 +20,6 @@ const UploadForm = () => {
       artist: e.target.artistname.value,
       categories: e.target.category.value,
     };
-    console.log(formData);
     try {
       const imageUploadResult = await uploadImage(e);
       console.log(imageUploadResult);
@@ -34,7 +33,6 @@ const UploadForm = () => {
         "/api/all-artworks",
         JSON.stringify({ data: formData })
       );
-      console.log(result);
       alert("Uploaded Sucessfully");
     } catch (error) {
       alert("Error adding profile data.");
