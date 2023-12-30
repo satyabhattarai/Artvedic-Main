@@ -213,20 +213,24 @@ const Featured = ({ products, category, workshop }) => {
           beforeChange={() => setIsMoving(true)}
           afterChange={() => setIsMoving(false)}
         >
-          {workshop?.data?.map((img) => {
+          {workshop?.data?.map((workshop) => {
             return (
               <div
                 className="relative aspect-square"
-                key={`categoory-${img.id}`}
+                key={`categoory-${workshop.id}`}
               >
                 <Image
                   draggable={false}
                   onClick={(e) => {
-                    if (!isMoving) router.push("workshopdashboard");
+                    if (!isMoving)
+                      router.push({
+                        pathname: "/workshopdashboard",
+                        query: { workshop: JSON.stringify(workshop) },
+                      });
                   }}
-                  key={`category-${img.id}`}
+                  key={`category-${workshop.id}`}
                   className="w-full h-auto "
-                  src={`${API_URL}${img.attributes.img.data.attributes.url}`}
+                  src={`${API_URL}${workshop.attributes.img.data.attributes.url}`}
                   alt="imagebrowse5"
                   layout="fill"
                   sizes="100vw"

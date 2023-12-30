@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hires",
+  "info": {
+    "singularName": "hire",
+    "pluralName": "hires",
+    "displayName": "hire",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "img": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "date": {
+      "type": "date"
+    },
+    "frame": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "request_by": {
+      "type": "email"
+    },
+    "artist": {
+      "type": "email"
+    }
+  }
+}

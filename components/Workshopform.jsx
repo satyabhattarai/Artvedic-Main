@@ -79,7 +79,7 @@ const Workshopform = () => {
                 />
 
                 <label
-                  for="art"
+                  htmlFor="art"
                   className="text-sm font-bold tracking-wide text-gray-500 "
                 >
                   WORKSHOP CATEGORY

@@ -82,7 +82,7 @@ const UploadForm = () => {
                 />
 
                 <label
-                  for="art"
+                  htmlFor="art"
                   className="text-sm font-bold tracking-wide text-gray-500"
                 >
                   Category
@@ -176,7 +176,7 @@ const UploadForm = () => {
                  <button className="flex justify-center p-4 my-5 font-semibold tracking-wide text-gray-100 transition duration-300 ease-in bg-blue-500 rounded-full shadow-lg cursor-pointer focus:outline-none focus:shadow-outline hover:bg-blue-600">
                   Upload
                 </button> */}
-                {/* <div>
+              {/* <div>
                   <input
                     type="file"
                     name="img"

@@ -23,12 +23,11 @@ const Chooseform = () => {
               </p>
             </section>
           </Link>
-          <Link href={"/artistpage"}>
+          <Link href={"/bidrequests"}>
             <section className="p-8 mb-8 bg-white rounded-lg shadow-md cursor-pointer option-container">
               <h2 className="mb-4 text-3xl font-semibold">Bid Requests</h2>
               <p className="mb-4 text-gray-600">
-                Dive into bid requests that cover a spectrum of creative
-                domains,design, content creation, and technology.
+                Dive into bid requests.
               </p>
             </section>
           </Link>
@@ -40,6 +39,17 @@ const Chooseform = () => {
               <p className="mb-4 text-gray-600">
                 Share your artistic skills by starting art teaching workshops
                 and inspiring others.
+              </p>
+            </section>
+          </Link>
+          <Link href={"/commissions"}>
+            <section className="p-8 mb-8 bg-white rounded-lg shadow-md cursor-pointer option-container">
+              <h2 className="mb-4 text-3xl font-semibold">
+                Commission Requests
+              </h2>
+              <p className="mb-4 text-gray-600">
+                Share your artistic skills by taking commissioned orders
+                from buyers.
               </p>
             </section>
           </Link>

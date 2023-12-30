@@ -33,15 +33,13 @@ const Contact = () => {
   };
 
   return (
-    <div
-      className={`${styles.container}`}
-    >
+    <div className={`${styles.container}`}>
       <h1>
         <pre className="mt-8 text-3xl ">CONTACT US</pre>
       </h1>
       <form onSubmit={handleSubmit}>
         <div className={`${styles.mb - 3}`}>
-          <label htmlFor="name" className={`${styles.formlabel} mt-4 mb-4`}>
+          <label htmlhtmlFor="name" className={`${styles.formlabel} mt-4 mb-4`}>
             Enter your name
           </label>
           <input
@@ -55,7 +53,7 @@ const Contact = () => {
           />
         </div>
         <div className={`${styles.mb - 3}`}>
-          <label htmlFor="email" className={`${styles.formlabel} mb-4`}>
+          <label htmlhtmlFor="email" className={`${styles.formlabel} mb-4`}>
             Email address
           </label>
           <input
@@ -65,7 +63,7 @@ const Contact = () => {
           />
         </div>
         <div className={`${styles.mb - 3}`}>
-          <label htmlFor="phone" className={`${styles.formlabel}`}>
+          <label htmlhtmlFor="phone" className={`${styles.formlabel}`}>
             Password
           </label>
           <input
@@ -78,7 +76,7 @@ const Contact = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="desc" className="mb-4 form-label">
+          <label htmlhtmlFor="desc" className="mb-4 form-label">
             Message
           </label>
           <textarea

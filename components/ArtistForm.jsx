@@ -18,7 +18,7 @@ const ArtistForm = () => {
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-                for="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Name
               </label>
@@ -32,7 +32,7 @@ const ArtistForm = () => {
             <div className="w-full md:w-1/2 px-3">
               <label
                 className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-                for="grid-last-name"
+                htmlFor="grid-last-name"
               >
                 Username
               </label>
@@ -48,7 +48,7 @@ const ArtistForm = () => {
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-                for="grid-password"
+                htmlFor="grid-password"
               >
                 TELL US ABOUT YOU
               </label>
@@ -62,7 +62,7 @@ const ArtistForm = () => {
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-                for="grid-city"
+                htmlFor="grid-city"
               >
                 City
               </label>
@@ -76,7 +76,7 @@ const ArtistForm = () => {
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-                for="grid-state"
+                htmlFor="grid-state"
               >
                 State
               </label>
@@ -107,7 +107,7 @@ const ArtistForm = () => {
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-                for="grid-zip"
+                htmlFor="grid-zip"
               >
                 Zip
               </label>
