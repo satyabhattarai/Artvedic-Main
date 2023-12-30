@@ -12,7 +12,6 @@ import { fetchDatafromApi } from "utils/api";
 import { useRouter } from "next/router";
 
 const Featured = ({ products, category, workshop }) => {
-  // console.log("apiResult", apiResult);
   const router = useRouter();
 
   // const [data, setData] = useState(null)
@@ -78,7 +77,6 @@ const Featured = ({ products, category, workshop }) => {
   //   { id: 9, path: "/Images/artvedic13.jpeg" },
   // ];
 
-  // console.log(products); //to see api array in console
   // useEffect(() => {
   //   fetchartworks();
   // }, []);
@@ -165,7 +163,6 @@ const Featured = ({ products, category, workshop }) => {
         <h3 className="text-[#F7F8F8] pb-[16px] ">ALL ARTWORKS</h3>
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 900: 3 }}>
           <Masonry gutter="24px">
-            {/* {console.log(products)} */}
             {products?.data?.slice(0, visible).map((artwork) => {
               return (
                 <Productcard

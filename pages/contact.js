@@ -39,7 +39,7 @@ const Contact = () => {
       </h1>
       <form onSubmit={handleSubmit}>
         <div className={`${styles.mb - 3}`}>
-          <label htmlhtmlFor="name" className={`${styles.formlabel} mt-4 mb-4`}>
+          <label htmlFor="name" className={`${styles.formlabel} mt-4 mb-4`}>
             Enter your name
           </label>
           <input
@@ -53,7 +53,7 @@ const Contact = () => {
           />
         </div>
         <div className={`${styles.mb - 3}`}>
-          <label htmlhtmlFor="email" className={`${styles.formlabel} mb-4`}>
+          <label htmlFor="email" className={`${styles.formlabel} mb-4`}>
             Email address
           </label>
           <input
@@ -63,7 +63,7 @@ const Contact = () => {
           />
         </div>
         <div className={`${styles.mb - 3}`}>
-          <label htmlhtmlFor="phone" className={`${styles.formlabel}`}>
+          <label htmlFor="phone" className={`${styles.formlabel}`}>
             Password
           </label>
           <input
@@ -76,7 +76,7 @@ const Contact = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlhtmlFor="desc" className="mb-4 form-label">
+          <label htmlFor="desc" className="mb-4 form-label">
             Message
           </label>
           <textarea

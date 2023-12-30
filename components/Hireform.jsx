@@ -17,10 +17,9 @@ const Hireform = () => {
 
 
 
-    const imageUploadResult = null;
+    var imageUploadResult = null;
     try {
        imageUploadResult = await uploadImage(e);
-      console.log(imageUploadResult);
     } catch (error) {
       alert("Error uploading submitted image.");
       return;
@@ -43,7 +42,6 @@ const Hireform = () => {
         "/api/hires",
         JSON.stringify({ data: formData })
       );
-      console.log(result);
       alert("Request sent to the artist");
     } catch (error) {
       alert("Error adding profile data.");
@@ -77,15 +75,12 @@ const Hireform = () => {
               WHAT TYPE OF ART DO YOU WANT?
             </label>
             <input
-              className="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-red-500 rounded appearance-none focus:outline-none focus:bg-white"
+              className="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-500 rounded appearance-none focus:outline-none focus:bg-white"
               id="grid-first-name"
               type="text"
               placeholder="Jane"
               name="name"
             />
-            <p className="text-xs italic text-red-500">
-              Please fill out this field.
-            </p>
           </div>
           <div className="w-full px-3 md:w-1/2">
             <label
@@ -122,7 +117,7 @@ const Hireform = () => {
           <div className="w-full px-3">
             <label
               className="block mb-2 text-xs font-bold tracking-wide text-white uppercase"
-              htmlhtmlFor="grid-password"
+              htmlFor="grid-password"
             >
               DO YOU NEED IT WITH FRAME OR WITHOUT FRAME?
             </label>
@@ -137,7 +132,7 @@ const Hireform = () => {
           <div className="w-full px-3 mb-6 md:w-1/3 md:mb-0">
             <label
               className="block mb-2 text-xs font-bold tracking-wide text-white uppercase"
-              htmlhtmlFor="grid-city"
+              htmlFor="grid-city"
             >
               City
             </label>

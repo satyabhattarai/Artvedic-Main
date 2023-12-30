@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
 const Productcard = ({ artwork }) => {
-  console.log(artwork);
   const router = useRouter();
   const dispatch = useDispatch();
   return (

@@ -18,7 +18,6 @@ const Workshopform = () => {
       img: uploadedImage,
       categories: e.target.category.value,
     };
-    console.log(formData);
     try {
       const imageUploadResult = await uploadImage(e);
       console.log(imageUploadResult);
@@ -32,7 +31,6 @@ const Workshopform = () => {
         "/api/workshops",
         JSON.stringify({ data: formData })
       );
-      console.log(result);
       alert("Uploaded Sucessfully");
     } catch (error) {
       alert("Error adding profile data.");

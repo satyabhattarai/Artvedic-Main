@@ -45,7 +45,6 @@ const ProductItems = (props) => {
   } else {
     return <p>Image not clicked</p>;
   }
-  console.log(artwork);
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = {
@@ -55,13 +54,11 @@ const ProductItems = (props) => {
       name: artwork.attributes.name,
       bid_by: session.user.email,
     };
-    console.log(formData);
     try {
       const result = await postDatatoApi(
         "/api/requests",
         JSON.stringify({ data: formData })
       );
-      console.log(result);
       alert("Bid Request Sent Successfully");
     } catch (error) {
       alert("Error bidding data.");

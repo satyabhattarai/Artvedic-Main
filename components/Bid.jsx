@@ -6,12 +6,12 @@ import { useSession } from "next-auth/react";
 
 const Artist = () => {
   const [requests, setRequests] = useState([]);
-  const [actionsText, setActionsText] = useState(null);
+  const [actionsText, setActionsText] = useState({});
 
   const { data: session } = useSession();
   useEffect(() => {
     const artistEmail = session?.user.email || "undefined";
-    console.log(artistEmail);
+
     async function getRequests() {
       // api result is a Promise waiting for data to be fetched from server
       const apiResult = await fetchDatafromApi(
@@ -46,11 +46,14 @@ const Artist = () => {
                   <td className="px-6 py-4">{request.attributes.price}</td>
                   <td className="px-6 py-4">{request.attributes.bid_by}</td>
                   <td className="px-6 py-4">
-                    {!actionsText ? (
+                  {console.log(actionsText)}
+                    {!actionsText || !actionsText[idx] ? (
                       <>
                         <button
                           onClick={() => {
-                            setActionsText("Accepted");
+                            let newActionsText = {...actionsText};
+                            newActionsText[idx] = 1;
+                            setActionsText(newActionsText);
                           }}
                           className="px-8 py-2 bg-green-400 rounded"
                         >
@@ -58,16 +61,18 @@ const Artist = () => {
                         </button>
                         <button
                           onClick={() => {
-                            setActionsText("Rejected");
+                            let newActionsText = {...actionsText};
+                            newActionsText[idx] = -1;
+                            setActionsText(newActionsText);
                           }}
                           className="px-8 py-2 ml-4 bg-red-400 rounded"
                         >
                           Reject
                         </button>
                       </>
-                    ) : (
-                      actionsText
-                    )}
+                    ) :
+                      actionsText[idx] === 1 ? "Accepted" : "Rejected"
+                    }
                   </td>
                 </tr>
               );
