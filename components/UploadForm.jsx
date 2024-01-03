@@ -11,22 +11,23 @@ const UploadForm = () => {
   const [uploadedImage, setUploadedImage] = useState();
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    var imageUploadResult = null;
+    try {
+      imageUploadResult = await uploadImage(e);
+    } catch (error) {
+      alert("Error uploading submitted image.");
+      return;
+    }
     const formData = {
       //strapi ko name price description & img left ma vako strapi ma vako right ma vako form ma j name cha tei.
       name: e.target.name.value,
       description: e.target.description.value,
       price: e.target.price.value,
-      img: uploadedImage,
+      img: imageUploadResult,
       artist: e.target.artistname.value,
       categories: e.target.category.value,
     };
-    try {
-      const imageUploadResult = await uploadImage(e);
-      console.log(imageUploadResult);
-    } catch (error) {
-      alert("Error uploading submitted image.");
-      return;
-    }
 
     try {
       const result = await postDatatoApi(
@@ -157,7 +158,7 @@ const UploadForm = () => {
                         type="file"
                         name="img"
                         onChange={(e) => setFiles(e.target.files)}
-                        className="justify-center hidden mt-4 text-center text-gray-500"
+                        className="justify-center mt-4 text-center text-gray-500"
                       />
                     </div>
                   </label>
